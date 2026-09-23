@@ -41,11 +41,13 @@ class HRState(BaseModel):
     cv_text: str = ""
     job_description: str = ""
 
+                                    
     # ── PERSON A — Screener Agent ─────────────────────────
     parsed_cv: Optional[ParsedCV] = None
     match_score: Optional[float] = None        # float 0.0–1.0
     screening_passed: Optional[bool] = None    # True = go to interview, False = reject
     claims: List[Claim] = Field(default_factory=list)
+
 
     # ── PERSON B — Interviewer Agent ──────────────────────
     questions: List[str] = Field(default_factory=list)
