@@ -1,0 +1,38 @@
+AI Software Engineering Intern
+
+We're looking for an AI Software Engineering Intern to join our team building
+LLM-powered applications and data-driven tools. You'll work on retrieval-
+augmented generation systems, custom AI agents, and full-stack applications
+that put them in front of real users.
+
+Responsibilities:
+- Develop AI applications using Large Language Models (LLMs), Retrieval-
+  Augmented Generation (RAG), and custom agent-based workflows
+- Build and contribute to full-stack web applications, working across both
+  frontend and backend
+- Perform data analysis and preprocessing to support AI-driven features
+- Apply deep learning techniques to real-world signal/data problems
+- Collaborate with a multidisciplinary engineering team on AI-driven solutions
+- Write clean, maintainable Python code and contribute to system design
+
+Requirements:
+- Currently pursuing or holding a degree in Computer Science, Computer
+  Engineering, or a related field
+- Strong programming skills in Python; familiarity with Java, C++, or
+  JavaScript a plus
+- Coursework or hands-on experience with Deep Learning and/or Large
+  Language Models
+- Experience with Git/GitHub and collaborative development workflows
+- Comfortable with data structures, database systems, and SQL
+- Strong communication skills and ability to work across disciplines
+
+Nice to have:
+- Experience implementing RAG pipelines or LLM-based agents
+- Exposure to full-stack development (HTML/CSS, databases, backend frameworks)
+- Familiarity with basic cybersecurity concepts or infrastructure tools
+- Prior project or internship experience applying deep learning to real data
+  (e.g. signal processing, anomaly detection)
+
+This is an internship position with mentorship from senior engineers, ideal
+for someone looking to grow their AI/ML and software engineering skills on
+real production systems.
