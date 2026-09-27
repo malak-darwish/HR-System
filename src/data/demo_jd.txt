@@ -1,0 +1,4 @@
+Entry-level Python developer for a supervised training role.
+Required: basic Python functions and testing concepts, basic SQL queries and joins,
+ability to explain debugging steps and collaborate when learning.
+Prior paid experience, a degree, and a public repository are not required.

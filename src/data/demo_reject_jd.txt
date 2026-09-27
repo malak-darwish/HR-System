@@ -1,0 +1,3 @@
+Senior embedded systems engineer.
+Mandatory: eight years of professional C++ embedded development, RTOS driver work,
+and demonstrated hardware board bring-up. Python-only coursework does not qualify.

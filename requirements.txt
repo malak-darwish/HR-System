@@ -1,0 +1,8 @@
+-c constraints.txt
+langchain-core==1.6.5
+langgraph==1.2.11
+langchain-google-genai==4.4.0
+google-genai==2.25.0
+pydantic==2.13.4
+python-dotenv==1.2.2
+requests==2.34.2

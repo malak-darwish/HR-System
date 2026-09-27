@@ -1,0 +1,6 @@
+SYNTHETIC CANDIDATE FOR CLASSROOM TESTING
+Demo Candidate
+Skills: Python and SQL.
+Experience: Student practice exercises; no professional experience claimed.
+Projects: Practised basic Python functions, pytest assertions, SQL SELECT queries,
+joins, and indexes in local coursework. No public GitHub repository is claimed.

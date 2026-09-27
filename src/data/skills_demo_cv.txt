@@ -1,0 +1,14 @@
+NOURA HADDAD
+Python / SQL Trainee Candidate
+Synthetic candidate for a classroom demonstration
+
+TECHNICAL KNOWLEDGE
+- Python unit testing with pytest: function inputs, assertions, boundary cases,
+  and checking expected exceptions.
+- SQL querying: SELECT, INNER JOIN, LEFT JOIN, GROUP BY, and the purpose of an
+  index when investigating a slow query.
+
+PUBLIC REPOSITORY REFERENCE
+The public repository https://github.com/malak-darwish/HR-System has Python
+as its primary language. This is a third-party reference, not a claim of
+ownership or contribution by Noura.

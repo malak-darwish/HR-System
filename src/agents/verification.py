@@ -1,161 +1,198 @@
-import os
-import re
-import sys
-from typing import List, Dict, Optional
+"""Person C's evidence collection and structured claim assessment."""
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from pydantic import Field, model_validator
 
-from pydantic import BaseModel, Field
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-from state import HRState, Claim
-from tools.verification_tools import (
-    github_verify_tool,
-    github_profile_scan_tool,
-    consistency_check_tool,
+from src.github_refs import extract_github_repositories, repository_urls
+from src.llm import structured_call
+from src.state import Claim, HRState, Record, Score, Text
+from src.tools.verification_tools import (
+    consistency_check_tool, github_profile_scan_tool, github_verify_tool,
 )
 
-class ClaimVerification(BaseModel):
-    text: str = Field(description="Must exactly match the original claim text, unchanged")
-    verified: bool
-    confidence: float = Field(description="0-1: how likely the claim is to be TRUE")
-    source: str = Field(description='Where the verification evidence came from, e.g. "github", "interview", "unverifiable"')
+# Provisional ceilings for evidence strength, not calibrated probabilities.
+INTERVIEW_SUPPORT_LIMIT = 0.80
+PUBLIC_EVIDENCE_SUPPORT_LIMIT = 0.95
 
 
-class VerificationResult(BaseModel):
-    """Structured Output Mode target — the LLM returns exactly this shape."""
+class ClaimVerification(Record):
+    claim_id: Text
+    verified: bool | None
+    confidence: Score | None
+    source: Text
+    evidence: Text
+    evidence_refs: list[Text] = Field(default_factory=list)
 
-    claims: List[ClaimVerification] = Field(description="One entry per input claim, in the same order")
-    follow_up_needed: bool = Field(description="True if any claim is contradicted or low-confidence")
-    consistency_flags: Dict[str, bool] = Field(
-        description="Map of claim text -> whether it is internally consistent with interview answers"
-    )
-    verification_notes: str = Field(description="2-3 sentence overall summary of what was found across all claims")
+    @model_validator(mode="after")
+    def check_verdict(self):
+        if self.verified is None and self.confidence is not None:
+            raise ValueError("Unknown claims must have null confidence.")
+        if self.verified is not None and self.confidence is None:
+            raise ValueError("Supported or contradicted claims require a confidence score.")
+        if self.verified is False and self.confidence > 0.5:
+            raise ValueError("A contradicted claim cannot have high support for its truth.")
+        return self
 
 
-def get_model():
-    return ChatGoogleGenerativeAI(
-        model="gemini-3.5-flash-lite",
-        google_api_key=os.environ.get("GOOGLE_API_KEY"),
-        max_retries=6,  
-    )
+class VerificationResult(Record):
+    claims: list[ClaimVerification]
+    verification_notes: Text
+
+
+def _extract_github_ref(text: str) -> tuple[str, str] | None:
+    refs = extract_github_repositories(text)
+    return refs[0] if refs else None
+
+
+def _apply_evidence_rules(claim: Claim, assessment: ClaimVerification, allowed_refs: set[str]) -> tuple[dict, list[str]]:
+    """Prevent an LLM source label from inventing access or independent verification."""
+    refs = list(dict.fromkeys(assessment.evidence_refs))
+    if not set(refs).issubset(allowed_refs):
+        raise ValueError(f"Verifier cited unavailable evidence for {claim.claim_id}.")
+    has_interview = any(ref.startswith("interview:") for ref in refs)
+    has_github = any(ref.startswith(("profile:", "repo:")) for ref in refs)
+    source = ("interview + github" if has_interview and has_github else
+              "github" if has_github else "interview" if has_interview else "unavailable")
+    verified, confidence = assessment.verified, assessment.confidence
+    notes = []
+    if verified is not None and not refs:
+        verified, confidence = None, None
+        notes.append("No accessible evidence was cited; the claim remains unknown.")
+    if verified is True and claim.category in {"education", "experience"}:
+        # Current tools provide public repository metadata and interview answers,
+        # not institutional records or independent employment documentation.
+        verified, confidence = None, None
+        notes.append("Education or employment history lacks independent documentation; interview statements and repository metadata do not establish it.")
+    if verified is not None:
+        limit = PUBLIC_EVIDENCE_SUPPORT_LIMIT if has_github else INTERVIEW_SUPPORT_LIMIT
+        if confidence > limit:
+            confidence = limit
+            notes.append(f"Support limited to {limit:.2f} by the available evidence type; this is not a calibrated probability.")
+    if has_interview and not has_github:
+        notes.append("Interview evidence only; no independent verification or proof of project authorship.")
+    return {
+        **claim.model_dump(), "verified": verified, "confidence": confidence,
+        "source": source, "evidence_refs": refs,
+        "evidence": " ".join([assessment.evidence, *notes]),
+    }, notes
 
 
 def verifier_node(state: HRState) -> dict:
-    """
-    LangGraph node function for the Verification Agent.
-    Returns a partial-state dict, as LangGraph nodes are expected to.
-    """
-    claims: List[Claim] = state.claims
-    answers: List[str] = state.answers
+    # Read raw input as well as summaries, including older saved states where A
+    # dropped the links. Follow-up answers can introduce additional references.
+    urls = repository_urls(
+        state.cv_text, *state.github_repository_urls,
+        *(state.parsed_cv.projects if state.parsed_cv else []),
+        *(claim.text for claim in state.claims), *state.answers,
+    )
+    cache = dict(state.github_evidence)
+    cached_keys = {key.lower(): key for key in cache}
+    repositories = {}
+    for owner, repo in extract_github_repositories(*urls):
+        key = cached_keys.get(f"repo:{owner}/{repo}".lower(), f"repo:{owner}/{repo}")
+        if key not in cache:
+            cache[key] = github_verify_tool.invoke({"username": owner, "repo": repo})
+        repositories[(owner.lower(), repo.lower())] = key
+    reference_updates = {"github_repository_urls": urls, "github_evidence": cache}
 
-    # one profile-wide GitHub scan per candidate (not per claim), so a bare
-    # skill claim like "Python" can be checked against real repo languages
-    # and READMEs, not just claims that literally say "github" in the text.
-    profile_evidence = None
-    if state.parsed_cv and state.parsed_cv.github_username:
-        profile_evidence = github_profile_scan_tool.invoke({"username": state.parsed_cv.github_username})
+    if not state.claims:
+        return {
+            **reference_updates,
+            "claims": [], "consistency_flags": {}, "follow_up_needed": False,
+            "verification_completed": True,
+            "verification_notes": "No checkable claims were extracted; required evidence is incomplete.",
+        }
 
-    evidence_blobs = []
-    for claim in claims:
-        blob = {"claim": claim.text, "github_repo_evidence": None, "consistency_scores": []}
-        # (gives commit history / direct language match a profile scan can't).
-        if "github" in claim.text.lower() or "repo" in claim.text.lower():
-            username, repo = _extract_github_ref(claim.text, state)
-            if username and repo:
-                blob["github_repo_evidence"] = github_verify_tool.invoke({"username": username, "repo": repo})
+    # Cache public evidence within this candidate's thread across follow-up rounds.
+    username = state.parsed_cv.github_username if state.parsed_cv else None
+    profile = None
+    profile_ref = None
+    if username:
+        key = f"profile:{username}"
+        if key not in cache:
+            cache[key] = github_profile_scan_tool.invoke({"username": username})
+        profile = cache[key]
+        if profile.get("status") == "found":
+            profile_ref = key
 
-        for answer in answers:
-            score = consistency_check_tool.invoke({"cv_claim": claim.text, "interview_answer": answer})
-            blob["consistency_scores"].append({"answer": answer, "score": score})
+    blobs = []
+    interview_refs = {f"interview:{i}" for i in range(1, len(state.answers) + 1)}
+    allowed_by_claim = {}
+    for claim in state.claims:
+        # Keep citation eligibility tied to links in the claim. Unrelated raw-CV
+        # references are fetched and recorded, but cannot boost its support score.
+        claim_repos = {repositories[(owner.lower(), repo.lower())]
+                       for owner, repo in extract_github_repositories(claim.text)}
+        repo_refs = {key for key in claim_repos if cache[key].get("status") == "found"}
+        allowed_by_claim[claim.claim_id] = interview_refs | repo_refs | ({profile_ref} if profile_ref else set())
+        blobs.append({
+            "claim_id": claim.claim_id, "text": claim.text, "category": claim.category,
+            "github_repo_evidence": {key: cache[key] for key in sorted(claim_repos)},
+            "allowed_evidence_refs": sorted(allowed_by_claim[claim.claim_id]),
+            "lexical_overlap_only": [
+                consistency_check_tool.invoke({"cv_claim": claim.text, "interview_answer": answer})
+                for answer in state.answers
+            ],
+        })
 
-        evidence_blobs.append(blob)
+    result = structured_call(VerificationResult,
+        "Assess EVERY input claim exactly once by claim_id using only the supplied evidence. "
+        "verified=true means supported by the available evidence, false means explicitly "
+        "contradicted, null means unknown or insufficient evidence. Unknown claims must have "
+        "null confidence. Otherwise confidence (0-1) measures support for the claim being TRUE: "
+        "a clear contradiction needs a low value, never high confidence in a false claim. "
+        "Explain each verdict in evidence and cite evidence_refs from that claim's allowed_evidence_refs. "
+        "Use interview:N for the relevant numbered answer and the supplied profile/repo references "
+        "only when their retrieved contents actually support your assessment. Never cite a failed "
+        "or unavailable lookup. Unknown claims may have no references. Interview-only support must "
+        "not exceed 0.80; public GitHub support must not exceed 0.95. These are provisional strength "
+        "ceilings, not factual probabilities. Education and employment history must stay unknown "
+        "without independent documentation; current tools do not provide that documentation. "
+        "A technical explanation can support technical understanding, not independently prove that "
+        "the candidate authored a project or achieved a reported historical metric. "
+        "Repository existence, stars, "
+        "language, forks, and READMEs do not prove candidate authorship or expertise. A public "
+        "profile may provide supporting clues only. referenced_repositories includes links "
+        "from the raw CV and answers even when no extracted claim mentions them. These are "
+        "context only unless listed in a claim's allowed_evidence_refs; do not assign their "
+        "ownership to the candidate or treat them as proof of unrelated claims. "
+        "A detailed technically correct answer "
+        "can support a skill; repeating a CV assertion cannot verify employment, a degree, "
+        "or authorship. Simulated answers are demo evidence only, never independent facts. "
+        "GitHub unavailable/not_found can mean private, rate limited, or inaccessible: these "
+        "are not contradictions. Lexical overlap is not semantic consistency and cannot "
+        "detect negation; read the full question/answer text. Account for clarifications "
+        "in follow-up answers. Return concise notes about evidence limits.",
+        {"claims": blobs, "profile_evidence": profile, "profile_evidence_ref": profile_ref,
+         "referenced_repositories": {key: cache[key] for key in repositories.values()},
+         "interview": [{"evidence_ref": f"interview:{i}", "question": question, "answer": answer}
+                       for i, (question, answer) in enumerate(zip(state.questions, state.answers), 1)],
+         "answer_source": state.answer_source})
 
-    prompt = _build_verification_prompt(claims, evidence_blobs, profile_evidence)
-
-    structured_model = get_model().with_structured_output(VerificationResult)
-    result: VerificationResult = structured_model.invoke(prompt)
-
-    # Merge SOM results back into the ORIGINAL Claim objects so we keep
-    # category instead of losing it.
-    verified_by_text = {cv.text: cv for cv in result.claims}
-    updated_claims: List[Claim] = []
-    for claim in claims:
-        match = verified_by_text.get(claim.text)
-        if match:
-            updated_claims.append(
-                claim.model_copy(update={
-                    "verified": match.verified,
-                    "confidence": match.confidence,
-                    "source": match.source,
-                })
-            )
-        else:
-            # SOM didn't return this claim for some reason, leave it untouched
-            # rather than silently dropping it.
-            updated_claims.append(claim)
-
+    by_id = {item.claim_id: item for item in result.claims}
+    expected = {claim.claim_id for claim in state.claims}
+    if len(by_id) != len(result.claims) or set(by_id) != expected:
+        raise ValueError("Verifier must return every input claim ID exactly once; no stale verdicts are accepted.")
+    updated, adjustments = [], []
+    for claim in state.claims:
+        item, notes = _apply_evidence_rules(claim, by_id[claim.claim_id], allowed_by_claim[claim.claim_id])
+        updated.append(item)
+        if notes:
+            adjustments.append(f"{claim.claim_id}: {' '.join(notes)}")
+    flags = {item["claim_id"]: item["verified"] is False for item in updated}
+    follow_up = any(
+        item["verified"] is not True or item["confidence"] is None or item["confidence"] < 0.5
+        for item in updated
+    )
+    supported = sum(item["verified"] is True for item in updated)
+    contradicted = sum(item["verified"] is False for item in updated)
+    unknown = len(updated) - supported - contradicted
+    notes = (f"After evidence checks: {supported} supported, {contradicted} contradicted, "
+             f"{unknown} unknown. Support from an interview is not independent verification. ")
+    # The LLM's preliminary summary may no longer match the corrected verdicts.
+    notes += " ".join(adjustments) if adjustments else result.verification_notes
     return {
-        "claims": updated_claims,
-        "follow_up_needed": result.follow_up_needed,
-        "consistency_flags": result.consistency_flags,
-        "verification_notes": result.verification_notes,
+        "claims": updated, "consistency_flags": flags, "follow_up_needed": follow_up,
+        "verification_completed": True,
+        "verification_notes": notes.strip(),
+        **reference_updates,
     }
-
-
-def _extract_github_ref(claim_text: str, state: HRState):
-    """
-    Tries the claim text first (e.g. "...github.com/user/repo..."), then
-    falls back to state.parsed_cv.github_username if the Screener already
-    extracted it, paired with a repo-name guess from the claim text.
-    Returns (username, repo) or (None, None).
-    """
-    match = re.search(r"github\.com/([\w-]+)/([\w-]+)", claim_text)
-    if match:
-        return match.group(1), match.group(2)
-
-    if state.parsed_cv and state.parsed_cv.github_username:
-        repo_match = re.search(r"[\w-]+/([\w-]+)", claim_text)
-        if repo_match:
-            return state.parsed_cv.github_username, repo_match.group(1)
-
-    return None, None
-
-
-def _build_verification_prompt(claims: List[Claim], evidence_blobs: list, profile_evidence: Optional[dict]) -> str:
-    lines = [
-        "You are verifying claims from a candidate's CV against gathered evidence.",
-        "For each claim, decide `verified` (bool), `confidence` (0-1 float), and `source` "
-        '(where the evidence came from, e.g. "github", "interview", "unverifiable").',
-        "Base every decision strictly on the evidence given below — do not invent facts not present in it.",
-        "`confidence` means how likely the claim is to be TRUE, not how sure you are of your verdict. "
-        "A clearly FALSE claim should get a LOW confidence (e.g. 0.05-0.2), a clearly TRUE claim should "
-        "get a HIGH confidence (e.g. 0.8-0.95). Never report high confidence for a claim you marked unverified.",
-        "Set `follow_up_needed` to true if ANY claim is contradicted or has confidence below 0.5.",
-        "Populate `consistency_flags` as claim_text -> bool (true = consistent, false = contradicted).",
-        "Write `verification_notes` as a short 2-3 sentence summary of the overall findings.",
-        "IMPORTANT: each returned claim's `text` field must exactly match the original claim text below, unchanged.",
-        "",
-    ]
-
-    if profile_evidence is not None:
-        lines.append("=== Candidate's GitHub profile (applies to ALL claims below, not just repo-specific ones) ===")
-        if profile_evidence.get("exists"):
-            lines.append(f"Languages used across public repos: {profile_evidence.get('languages_used')}")
-            for repo in profile_evidence.get("repos", []):
-                lines.append(f"  - Repo '{repo['name']}' ({repo.get('language')}): {repo.get('description')}")
-                if repo.get("readme_excerpt"):
-                    lines.append(f"    README excerpt: {repo['readme_excerpt']}")
-        else:
-            lines.append(f"GitHub profile not found or inaccessible: {profile_evidence.get('reason')}")
-        lines.append("")
-
-    for claim, blob in zip(claims, evidence_blobs):
-        lines.append(f"Claim: {claim.text}")
-        if blob["github_repo_evidence"] is not None:
-            lines.append(f"  Specific-repo evidence: {blob['github_repo_evidence']}")
-        for cs in blob["consistency_scores"]:
-            lines.append(f'  Interview answer: "{cs["answer"]}" (similarity: {cs["score"]})')
-        lines.append("")
-
-    return "\n".join(lines)

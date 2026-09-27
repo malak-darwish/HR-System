@@ -1,67 +1,106 @@
-"""
-state.py — Shared LangGraph State for HR Multi-Agent System
-Owned by: Person A (Screener Agent)
-"""
+"""Shared contract for all four agents; lists use replacement semantics."""
 
-from typing import Optional, List, Dict
-from pydantic import BaseModel, Field
+from typing import Annotated, Any, Literal
+
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
+
+Score = Annotated[float, Field(strict=True, ge=0, le=1, allow_inf_nan=False)]
+Text = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+Decision = Literal["hire", "reject", "waitlist"]
 
 
-class ParsedCV(BaseModel):
-    """Structured representation of a parsed CV."""
+class Record(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+
+class ParsedCV(Record):
     name: str = ""
     email: str = ""
     phone: str = ""
-    education: List[str] = Field(default_factory=list)
-    experience: List[str] = Field(default_factory=list)
-    skills: List[str] = Field(default_factory=list)
-    projects: List[str] = Field(default_factory=list)
-    github_username: Optional[str] = None
-    years_of_experience: Optional[float] = None
+    education: list[str] = Field(default_factory=list)
+    experience: list[str] = Field(default_factory=list)
+    skills: list[str] = Field(default_factory=list)
+    projects: list[str] = Field(default_factory=list)
+    github_username: str | None = None
+    years_of_experience: Annotated[float, Field(ge=0, allow_inf_nan=False)] | None = None
 
 
-class Claim(BaseModel):
-    """
-    One atomic checkable claim extracted from the CV.
-    Seeded by Person A, verified by Person C.
-    """
-    text: str                         # e.g. "3 years at Company X"
-    category: str                     # "experience" | "skill" | "education" | "project"
-    verified: Optional[bool] = None   # filled by Person C
-    confidence: Optional[float] = None  # 0.0 - 1.0, filled by Person C
-    source: Optional[str] = None      # e.g. "github", "interview_answer"
+class Claim(Record):
+    claim_id: Text
+    text: Text
+    category: Literal["experience", "skill", "education", "project"]
+    # True: supported by available evidence; False: contradicted; None: unknown.
+    verified: Annotated[bool, Field(strict=True)] | None = None
+    # Support for the truth of the claim, NOT certainty in a negative verdict.
+    confidence: Score | None = None
+    source: Text | None = None
+    evidence: Text | None = None
+    evidence_refs: list[Text] = Field(default_factory=list)
 
 
-class HRState(BaseModel):
-    """
-    Full shared state for the HR LangGraph multi-agent system.
-    """
+class RequirementAssessment(Record):
+    requirement_id: Text
+    requirement: Text
+    job_description_quote: Text
+    evidence_kind: Literal["capability", "documentary"]
+    claim_ids: list[Text] = Field(default_factory=list)
+    supported: bool
+    reasoning: Text
 
-    # ── INPUTS (set once before graph runs) ──────────────
+
+class HRState(Record):
     cv_text: str = ""
     job_description: str = ""
+    parsed_cv: ParsedCV | None = None
+    match_score: Score | None = None
+    screening_passed: Annotated[bool, Field(strict=True)] | None = None
+    screening_reasoning: Text | None = None
+    claims: list[Claim] = Field(default_factory=list)
 
-                                    
-    # ── PERSON A — Screener Agent ─────────────────────────
-    parsed_cv: Optional[ParsedCV] = None
-    match_score: Optional[float] = None        # float 0.0–1.0
-    screening_passed: Optional[bool] = None    # True = go to interview, False = reject
-    claims: List[Claim] = Field(default_factory=list)
+    questions: list[Text] = Field(default_factory=list)
+    answers: list[Text] = Field(default_factory=list)
+    interview_scores: list[Score] = Field(default_factory=list)
+    interview_score_reasoning: list[Text] = Field(default_factory=list)
+    interview_complete: bool = False
+    answer_source: Literal["candidate", "simulated"] = "candidate"
 
+    # One meaning across B/C/D: True means an unresolved contradiction.
+    consistency_flags: dict[str, Annotated[bool, Field(strict=True)]] = Field(default_factory=dict)
+    follow_up_needed: bool = False
+    verification_completed: bool = False
+    verification_notes: Text | None = None
+    # References only: a repository owner is not necessarily the candidate.
+    github_repository_urls: list[Text] = Field(default_factory=list)
+    github_evidence: dict[str, Any] = Field(default_factory=dict)
 
-    # ── PERSON B — Interviewer Agent ──────────────────────
-    questions: List[str] = Field(default_factory=list)
-    answers: List[str] = Field(default_factory=list)
-    interview_scores: List[float] = Field(default_factory=list)
-    
+    interview_round: Annotated[int, Field(strict=True, ge=0)] = 0
+    follow_up_count: Annotated[int, Field(strict=True, ge=0)] = 0
+    max_follow_ups: Annotated[int, Field(strict=True, ge=0, le=5)] = 2
 
-    # ── PERSON C — Verification Agent ─────────────────────
-    consistency_flags: Dict[str, bool] = Field(default_factory=dict)
-    follow_up_needed: Optional[bool] = None
-    verification_notes: Optional[str] = None
-    
-    
-    # ── PERSON D — Recruiter Agent ────────────────────────
-    overall_score: Optional[float] = None
-    final_decision: Optional[str] = None       # "hire" | "reject" | "waitlist"
-    decision_reasoning: Optional[str] = None
+    overall_score: Score | None = None
+    interview_average: Score | None = None
+    requirement_assessments: list[RequirementAssessment] = Field(default_factory=list)
+    requirement_coverage: Score | None = None
+    required_evidence_complete: bool = False
+    scored_claim_ids: list[Text] = Field(default_factory=list)
+    excluded_claim_ids: list[Text] = Field(default_factory=list)
+    verification_limitations: list[Text] = Field(default_factory=list)
+    final_decision: Decision | None = None
+    decision_reasoning: Text | None = None
+
+    @model_validator(mode="after")
+    def check_contract(self):
+        ids = [claim.claim_id for claim in self.claims]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Claim IDs must be unique.")
+        if not set(self.consistency_flags).issubset(ids):
+            raise ValueError("Consistency flags must refer to existing claim IDs.")
+        if len(self.questions) != len(self.answers):
+            raise ValueError("Every interview question must have one answer.")
+        if len(self.interview_scores) > len(self.answers):
+            raise ValueError("Interview scores cannot outnumber answers.")
+        if len(self.interview_score_reasoning) != len(self.interview_scores):
+            raise ValueError("Every interview score needs a rationale.")
+        if self.follow_up_count > self.max_follow_ups:
+            raise ValueError("Follow-up count exceeds the configured limit.")
+        return self

@@ -1,0 +1,11 @@
+Python / SQL Trainee
+
+A supervised entry-level training role.
+Required technical knowledge:
+- Explain how to test a Python function using pytest, including boundary cases
+  and expected exceptions.
+- Explain SQL joins, grouping, and how indexes can help investigate slow queries.
+
+The interview assesses technical understanding and how the candidate would
+approach debugging and asking for help. No degree, prior employment, or public
+repository contribution is required for this trainee role.
