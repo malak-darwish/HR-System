@@ -1,0 +1,125 @@
+{
+  "cv_text": "NOURA HADDAD\nPython / SQL Trainee Candidate\nSynthetic candidate for a classroom demonstration\n\nTECHNICAL KNOWLEDGE\n- Python unit testing with pytest: function inputs, assertions, boundary cases,\n  and checking expected exceptions.\n- SQL querying: SELECT, INNER JOIN, LEFT JOIN, GROUP BY, and the purpose of an\n  index when investigating a slow query.\n\nPUBLIC REPOSITORY REFERENCE\nThe public repository https://github.com/malak-darwish/HR-System has Python\nas its primary language. This is a third-party reference, not a claim of\nownership or contribution by Noura.\n\nADDITIONAL SYNTHETIC BACKGROUND\nBachelor degree and internship history are claimed; independent documentation is unavailable.\n",
+  "job_description": "Python / SQL Trainee\n\nA supervised entry-level training role.\nRequired technical knowledge:\n- Explain how to test a Python function using pytest, including boundary cases\n  and expected exceptions.\n- Explain SQL joins, grouping, and how indexes can help investigate slow queries.\n\nThe interview assesses technical understanding and how the candidate would\napproach debugging and asking for help. Prior employment and public repository contributions are not required.\nA bachelor degree is mandatory for this role.\n",
+  "parsed_cv": {
+    "name": "Noura Haddad",
+    "email": "",
+    "phone": "",
+    "education": [
+      "Synthetic bachelor degree claim; not independently verified."
+    ],
+    "experience": [
+      "Synthetic internship claim; not independently verified."
+    ],
+    "skills": [
+      "Python",
+      "SQL",
+      "pytest",
+      "SELECT",
+      "INNER JOIN",
+      "LEFT JOIN",
+      "GROUP BY"
+    ],
+    "projects": [],
+    "github_username": null,
+    "years_of_experience": null
+  },
+  "match_score": 0.8,
+  "screening_passed": true,
+  "screening_reasoning": "The CV lists Python, SQL, pytest, and relevant SQL concepts (SELECT, INNER JOIN, LEFT JOIN, GROUP BY) which align well with the technical requirements. However, it lacks specific explanation or demonstration of boundary cases/expected exceptions in pytest and database indexes for slow queries.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Noura Haddad has knowledge of Python unit testing with pytest",
+      "category": "skill",
+      "verified": true,
+      "confidence": 0.8,
+      "source": "interview",
+      "evidence": "Noura Haddad demonstrates knowledge of Python unit testing with pytest across multiple interview answers detailing prefixes, parametrization, exceptions, and fixtures. Interview evidence only; no independent verification or proof of project authorship.",
+      "evidence_refs": [
+        "interview:1",
+        "interview:3",
+        "interview:4"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "text": "Noura Haddad has knowledge of SQL querying including SELECT, INNER JOIN, LEFT JOIN, and GROUP BY",
+      "category": "skill",
+      "verified": true,
+      "confidence": 0.8,
+      "source": "interview",
+      "evidence": "Noura Haddad demonstrates knowledge of SQL querying including INNER JOIN, LEFT JOIN, and GROUP BY operations in interview response 2. Interview evidence only; no independent verification or proof of project authorship.",
+      "evidence_refs": [
+        "interview:2"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "text": "Holds a bachelor degree",
+      "category": "education",
+      "verified": null,
+      "confidence": null,
+      "source": "unavailable",
+      "evidence": "Synthetic missing-documentation fixture. No independent records were supplied.",
+      "evidence_refs": []
+    },
+    {
+      "claim_id": "C4",
+      "text": "Completed an internship",
+      "category": "experience",
+      "verified": null,
+      "confidence": null,
+      "source": "unavailable",
+      "evidence": "Synthetic missing-documentation fixture. No independent records were supplied.",
+      "evidence_refs": []
+    }
+  ],
+  "questions": [
+    "Can you explain how to test a Python function using pytest, including how you would handle boundary cases and expected exceptions?",
+    "How do INNER JOIN and LEFT JOIN differ in SQL, and how can database indexes help investigate slow queries involving grouping?",
+    "Describe a time you had to learn a technical concept quickly under pressure, and explain how you approached debugging and asking for help.",
+    "Walk me through how you approach learning new technical tools and applying them to solve a problem from scratch."
+  ],
+  "answers": [
+    "To test a Python function using pytest, I write a simple test function starting with the 'test_' prefix and use standard assert statements to verify the output. For boundary cases, I add parameterized tests using the 'pytest.mark.parametrize' decorator to cover edge values like zero, negative numbers, or empty inputs efficiently. To handle expected exceptions, I use 'pytest.raises' to ensure the function fails gracefully and raises the correct error type when invalid data is provided.",
+    "An INNER JOIN returns only the rows that have matching values in both tables, whereas a LEFT JOIN returns all records from the left table and the matched records from the right table, filling in NULLs where there is no match. When investigating slow queries involving GROUP BY, database indexes help by pre-sorting and quickly locating the grouped data without requiring a full table scan. Specifically, creating a composite index on the columns used in both the WHERE and GROUP BY clauses can dramatically reduce query execution time.",
+    "When facing a tight deadline to integrate a new data validation pipeline in Python, I had to quickly master advanced pytest fixtures. I approached debugging by isolating the failing test cases, adding print statements and stepping through the execution trace to pinpoint where the mock data deviated from expectations. When I hit a roadblock regarding fixture scope, I researched the official documentation first and then consulted a senior colleague with a precise question about session-level setup. This structured approach allowed me to resolve the issue swiftly without wasting team resources.",
+    "When approaching a new technical tool, I start by reviewing the official documentation to understand the core concepts and basic syntax. I then set up a small, isolated sandbox environment to test simple use cases and experiment with its features hands-on. Once I grasp the fundamentals, I map the tool directly to the specific problem I need to solve, building a minimal viable prototype and iterating based on the results. Throughout this process, I rely on targeted debugging and testing with tools like pytest to validate that the new implementation meets all requirements reliably."
+  ],
+  "interview_complete": true,
+  "answer_source": "simulated",
+  "consistency_flags": {
+    "C1": false,
+    "C2": false,
+    "C3": false,
+    "C4": false
+  },
+  "follow_up_needed": true,
+  "verification_completed": true,
+  "verification_notes": "Synthetic policy fixture: C1/C2 supported by saved interview evidence; C3/C4 remain unknown. No contradictions.",
+  "github_repository_urls": [
+    "https://github.com/malak-darwish/HR-System"
+  ],
+  "github_evidence": {
+    "repo:malak-darwish/HR-System": {
+      "status": "found",
+      "exists": true,
+      "url": "https://github.com/malak-darwish/HR-System",
+      "language": "Python",
+      "language_matches_claim": null,
+      "description": null,
+      "stars": 0,
+      "fork": false,
+      "has_commits": true,
+      "commits_status": "found",
+      "readme": {
+        "status": "found",
+        "excerpt": ""
+      }
+    }
+  },
+  "interview_round": 1,
+  "follow_up_count": 0,
+  "max_follow_ups": 0
+}

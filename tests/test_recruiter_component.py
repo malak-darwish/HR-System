@@ -35,6 +35,14 @@ class RecruiterComponentTests(unittest.TestCase):
                 {"answer_index": item["answer_index"], "score": 1.0, "reasoning": "Complete explanation."}
                 for item in reversed(payload["transcript"])
             ]})
+        if schema.__name__ == "MandatoryRequirements":
+            return schema.model_validate({"requirements": [{"requirement": "Python knowledge",
+                "job_description_quote": payload["job_description"], "evidence_kind": "capability"}]})
+        if schema.__name__ == "RequirementMatches":
+            return schema.model_validate({"matches": [{"requirement_id": r["requirement_id"],
+                "claim_ids": [c["claim_id"] for c in payload["claims"]],
+                "evidence_sufficient": True, "reasoning": "Controlled requirement assessment."}
+                for r in payload["requirements"]]})
         if schema.__name__ == "RecruiterExplanation":
             return schema.model_validate({"final_decision": payload["policy"]["final_decision"],
                                           "decision_reasoning": "Explanation from supplied evidence."})
@@ -42,7 +50,7 @@ class RecruiterComponentTests(unittest.TestCase):
 
     def models(self):
         stack = ExitStack()
-        for module in ("src.agents.recruiter", "src.tools.recruiter_tools"):
+        for module in ("src.agents.recruiter", "src.tools.recruiter_tools", "src.tools.requirement_tools"):
             stack.enter_context(patch(module + ".structured_call", side_effect=self.respond))
         return stack
 

@@ -38,6 +38,16 @@ class Claim(Record):
     evidence_refs: list[Text] = Field(default_factory=list)
 
 
+class RequirementAssessment(Record):
+    requirement_id: Text
+    requirement: Text
+    job_description_quote: Text
+    evidence_kind: Literal["capability", "documentary"]
+    claim_ids: list[Text] = Field(default_factory=list)
+    supported: bool
+    reasoning: Text
+
+
 class HRState(Record):
     cv_text: str = ""
     job_description: str = ""
@@ -68,6 +78,13 @@ class HRState(Record):
     max_follow_ups: Annotated[int, Field(strict=True, ge=0, le=5)] = 2
 
     overall_score: Score | None = None
+    interview_average: Score | None = None
+    requirement_assessments: list[RequirementAssessment] = Field(default_factory=list)
+    requirement_coverage: Score | None = None
+    required_evidence_complete: bool = False
+    scored_claim_ids: list[Text] = Field(default_factory=list)
+    excluded_claim_ids: list[Text] = Field(default_factory=list)
+    verification_limitations: list[Text] = Field(default_factory=list)
     final_decision: Decision | None = None
     decision_reasoning: Text | None = None
 
