@@ -1,0 +1,576 @@
+{
+  "final_state": {
+    "cv_text": "Malak Darwish\nSenior Computer and Electrical Engineering Student • Lebanese American University\nBeirut, Lebanon • +961-03-070-331 • malak.darwish@lau.edu\nEducation\nBE in Computer Engineering\nLebanese American University (LAU)\nExpected Graduation: Fall 2028\nBeirut, LB\nGithub: https://github.com/malak-darwish\n• Relevant Coursework: Deep Learning, Large Language Models, Software Engineering, Database Systems, Commu\nnication Systems, Data Structures\n• Honors & Awards: Merit Scholarship for Baccalaureate Distinction, Dean’s Distinguished List\nSkills\nProgramming: Python, Java, C++, JavaScript, SQL, Assembly (Easy68K)\nAI/ML: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Deep Learning, Data Analysis\nFrameworks & Tools: Git, GitHub, MATLAB, ModelSim, HTML, CSS, LaTeX, Microsoft Office, LTspice\nWork Experience\nAI & Software Engineering Intern\nDar\nSummer 2026\nInternship\n• Developed AI applications using Retrieval-Augmented Generation (RAG), custom agents, and LLM-based work\nflows.\n• Built and contributed to full-stack applications while collaborating with multidisciplinary engineering teams.\n• Performed data analysis and preprocessing to support AI-driven solutions.\n• Gained hands-on experience with cybersecurity concepts, Microsoft Defender, and ICT infrastructure.\nCoding & Electronics Instructor\nSTEM Outreach Program\n2025\nPart-time Job\n• Delivered coding and electronics workshops and designed hands-on learning activities for students across four schools.\nSelected Projects\nSigmaTutor\nLarge Language Models\n• Developed an AI tutor for Signals and Communication Systems using a custom LLM agent with specialized tools.\n2026\nCourse Project\n• Implemented RAG to provide accurate, context-aware explanations from course materials, and tools for signal\nplotting, exam generation, and matlab coding.\nHeartbeat Anomaly Detection\nDeep Learning\n• Developed a deep learning model to detect abnormal heartbeats from ECG signals.\n• Applied data preprocessing, feature extraction, model training, and performance evaluation.\nCamp Management System\nSoftware Engineering\n2026\nCourse Project\n2026\nCourse Project\n• Developed a full-stack web application for managing camp registrations, participants, schedules, and administrative\ntasks.\n• Worked on both frontend and backend development while applying software engineering principles, database design,\nand team collaboration practices.\nLogic-Controlled Board\nDigital Systems\n• Implemented a digital system using TTL logic gates to control LED mapping based on switch activation order.\n2025\nCourse Project\n• Designed combinational and sequential logic without using microcontrollers",
+    "job_description": "AI Software Engineering Intern\n\nWe're looking for an AI Software Engineering Intern to join our team building\nLLM-powered applications and data-driven tools. You'll work on retrieval-\naugmented generation systems, custom AI agents, and full-stack applications\nthat put them in front of real users.\n\nResponsibilities:\n- Develop AI applications using Large Language Models (LLMs), Retrieval-\n  Augmented Generation (RAG), and custom agent-based workflows\n- Build and contribute to full-stack web applications, working across both\n  frontend and backend\n- Perform data analysis and preprocessing to support AI-driven features\n- Apply deep learning techniques to real-world signal/data problems\n- Collaborate with a multidisciplinary engineering team on AI-driven solutions\n- Write clean, maintainable Python code and contribute to system design\n\nRequirements:\n- Currently pursuing or holding a degree in Computer Science, Computer\n  Engineering, or a related field\n- Strong programming skills in Python; familiarity with Java, C++, or\n  JavaScript a plus\n- Coursework or hands-on experience with Deep Learning and/or Large\n  Language Models\n- Experience with Git/GitHub and collaborative development workflows\n- Comfortable with data structures, database systems, and SQL\n- Strong communication skills and ability to work across disciplines\n\nNice to have:\n- Experience implementing RAG pipelines or LLM-based agents\n- Exposure to full-stack development (HTML/CSS, databases, backend frameworks)\n- Familiarity with basic cybersecurity concepts or infrastructure tools\n- Prior project or internship experience applying deep learning to real data\n  (e.g. signal processing, anomaly detection)\n\nThis is an internship position with mentorship from senior engineers, ideal\nfor someone looking to grow their AI/ML and software engineering skills on\nreal production systems.",
+    "parsed_cv": {
+      "name": "Malak Darwish",
+      "email": "malak.darwish@lau.edu",
+      "phone": "+961-03-070-331",
+      "education": [
+        "BE in Computer Engineering, Lebanese American University (LAU), Expected Graduation: Fall 2028"
+      ],
+      "experience": [
+        "AI & Software Engineering Intern at Dar, Summer 2026",
+        "Coding & Electronics Instructor at STEM Outreach Program, 2025"
+      ],
+      "skills": [
+        "Python",
+        "Java",
+        "C++",
+        "JavaScript",
+        "SQL",
+        "Assembly (Easy68K)",
+        "Large Language Models (LLMs)",
+        "Retrieval-Augmented Generation (RAG)",
+        "Deep Learning",
+        "Data Analysis",
+        "Git",
+        "GitHub",
+        "MATLAB",
+        "ModelSim",
+        "HTML",
+        "CSS",
+        "LaTeX",
+        "Microsoft Office",
+        "LTspice"
+      ],
+      "projects": [
+        "SigmaTutor",
+        "Heartbeat Anomaly Detection",
+        "Camp Management System",
+        "Logic-Controlled Board"
+      ],
+      "github_username": "malak-darwish",
+      "years_of_experience": null
+    },
+    "match_score": 0.95,
+    "screening_passed": true,
+    "screening_reasoning": "The candidate is currently pursuing a degree in Computer Engineering, has direct experience as an AI & Software Engineering Intern, and possesses strong Python skills along with hands-on experience in LLMs, RAG, deep learning, and data analysis. They also match the nice-to-have criteria with relevant projects like Heartbeat Anomaly Detection. Match score 0.95 >= threshold 0.6.",
+    "claims": [
+      {
+        "claim_id": "C1",
+        "text": "BE in Computer Engineering at Lebanese American University (LAU)",
+        "category": "education",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "There is no mention of the Lebanese American University BE degree in the available GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C2",
+        "text": "AI & Software Engineering Intern at Dar",
+        "category": "experience",
+        "verified": true,
+        "confidence": 0.6,
+        "source": "interview",
+        "evidence": "The candidate explicitly confirms working at Dar on internal full-stack tools, data analysis, and preprocessing.",
+        "evidence_refs": [
+          "interview:4",
+          "interview:3"
+        ]
+      },
+      {
+        "claim_id": "C3",
+        "text": "Coding & Electronics Instructor at STEM Outreach Program",
+        "category": "experience",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "There is no evidence in the provided repositories or interview answers regarding the STEM Outreach Program instructor position.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C4",
+        "text": "Python",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.9,
+        "source": "github",
+        "evidence": "Python is used in public repositories such as 'SigmaTutor' and 'HR-System', and is discussed in the context of deep learning models.",
+        "evidence_refs": [
+          "profile:malak-darwish",
+          "interview:1"
+        ]
+      },
+      {
+        "claim_id": "C5",
+        "text": "Java",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "Java is not mentioned in the GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C6",
+        "text": "C++",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "C++ is not mentioned in the provided GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C7",
+        "text": "JavaScript",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.9,
+        "source": "github",
+        "evidence": "JavaScript is listed as a language used across public repositories such as 'CampMondo', 'ToDoList', and 'RAGSystem'.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C8",
+        "text": "SQL",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "interview",
+        "evidence": "The candidate discusses writing SQL queries with JOINs, GROUP BY, and parameterized queries for the camp management system.",
+        "evidence_refs": [
+          "interview:2"
+        ]
+      },
+      {
+        "claim_id": "C9",
+        "text": "Assembly (Easy68K)",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "Assembly (Easy68K) is not mentioned in the provided GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C10",
+        "text": "Large Language Models (LLMs)",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.6,
+        "source": "github",
+        "evidence": "LLMs are utilized in the SigmaTutor and RAGSystem repositories and discussed in the interview answers.",
+        "evidence_refs": [
+          "profile:malak-darwish",
+          "interview:5",
+          "interview:3"
+        ]
+      },
+      {
+        "claim_id": "C11",
+        "text": "Retrieval-Augmented Generation (RAG)",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.6,
+        "source": "github",
+        "evidence": "RAG is featured in the SigmaTutor and RAGSystem repositories and explicitly confirmed by the candidate.",
+        "evidence_refs": [
+          "profile:malak-darwish",
+          "interview:5",
+          "interview:3"
+        ]
+      },
+      {
+        "claim_id": "C12",
+        "text": "Deep Learning",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "interview",
+        "evidence": "The candidate discusses training a deep learning model in PyTorch for heartbeat anomaly detection.",
+        "evidence_refs": [
+          "interview:1"
+        ]
+      },
+      {
+        "claim_id": "C13",
+        "text": "Data Analysis",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "interview",
+        "evidence": "The candidate confirms doing data analysis and preprocessing on project data during their work at Dar.",
+        "evidence_refs": [
+          "interview:4"
+        ]
+      },
+      {
+        "claim_id": "C14",
+        "text": "Git",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.9,
+        "source": "github",
+        "evidence": "The candidate has multiple public repositories on GitHub, demonstrating direct evidence for Git proficiency.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C15",
+        "text": "GitHub",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.9,
+        "source": "github",
+        "evidence": "The candidate's GitHub profile contains multiple active public repositories.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C16",
+        "text": "MATLAB",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "github",
+        "evidence": "The SigmaTutor repository explicitly incorporates MATLAB code generation.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C17",
+        "text": "ModelSim",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "ModelSim is not mentioned in the provided GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C18",
+        "text": "HTML",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "github",
+        "evidence": "HTML is a core part of full-stack web applications like CampMondo and ToDoList found in the GitHub profile.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C19",
+        "text": "CSS",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "github",
+        "evidence": "CSS is used in full-stack web applications present in the GitHub profile.",
+        "evidence_refs": [
+          "profile:malak-darwish"
+        ]
+      },
+      {
+        "claim_id": "C20",
+        "text": "LaTeX",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "LaTeX is not mentioned in the provided GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C21",
+        "text": "Microsoft Office",
+        "category": "skill",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "interview",
+        "evidence": "The candidate mentions exposure to cybersecurity tools like Microsoft Defender during their stint at Dar.",
+        "evidence_refs": [
+          "interview:4"
+        ]
+      },
+      {
+        "claim_id": "C22",
+        "text": "LTspice",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "LTspice is not mentioned in the provided GitHub repositories or interview answers.",
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C23",
+        "text": "Developed SigmaTutor AI tutor for Signals and Communication Systems",
+        "category": "project",
+        "verified": true,
+        "confidence": 0.6,
+        "source": "github",
+        "evidence": "The SigmaTutor repository confirms the development of the AI tutor for communications engineering.",
+        "evidence_refs": [
+          "profile:malak-darwish",
+          "interview:5",
+          "interview:3"
+        ]
+      },
+      {
+        "claim_id": "C24",
+        "text": "Developed Heartbeat Anomaly Detection deep learning model",
+        "category": "project",
+        "verified": true,
+        "confidence": 0.85,
+        "source": "interview",
+        "evidence": "The candidate describes building and evaluating a deep learning model for heart beat anomaly detection using ECG signals.",
+        "evidence_refs": [
+          "interview:1"
+        ]
+      },
+      {
+        "claim_id": "C25",
+        "text": "Developed Camp Management System full-stack web application",
+        "category": "project",
+        "verified": true,
+        "confidence": 0.9,
+        "source": "github",
+        "evidence": "The CampMondo repository confirms the creation of the full-stack camp management system.",
+        "evidence_refs": [
+          "profile:malak-darwish",
+          "interview:2"
+        ]
+      },
+      {
+        "claim_id": "C26",
+        "text": "Implemented Logic-Controlled Board digital system using TTL logic gates",
+        "category": "project",
+        "verified": null,
+        "confidence": null,
+        "source": "unverifiable",
+        "evidence": "There is no mention of the logic-controlled board project in the provided repositories or interview answers.",
+        "evidence_refs": []
+      }
+    ],
+    "questions": [
+      "Can you explain how you implemented Python in your projects, such as your SigmaTutor or Heartbeat Anomaly Detection, and walk me through your technical approach?",
+      "Given that SQL and database systems are a core requirement for our data-driven tools, can you describe a time you designed a database schema or wrote complex queries using SQL, and how you ensured data integrity?",
+      "Tell me about a time you had to learn a new AI framework or tool quickly under pressure for your STEM Outreach Program or your recent internship at Dar, and what your approach was.",
+      "Walk me through your role as an AI & Software Engineering Intern at Dar this past Summer 2026, and highlight your key contributions to LLM-powered applications or RAG systems during that time.",
+      "During our discussion, we noted a discrepancy regarding your experience with Retrieval-Augmented Generation (RAG), as your CV lists this skill while your interview responses indicated that you have not yet learned it; could you help clarify your current level of familiarity and hands-on experience with RAG?"
+    ],
+    "answers": [
+      "he most complex thing I've built with Python is the Heartbeat Anomaly Detection project. I cleaned and segmented ECG signals with NumPy and Pandas, then trained a deep learning model in PyTorch to classify abnormal beats, evaluating it with precision and recall because abnormal beats are rare.",
+      "In the Camp Management System, I designed a relational schema with separate tables for participants, camps, registrations, and schedules, linked with foreign keys. I wrote SQL queries with JOINs to list each camper's schedule, GROUP BY queries to count registrations per camp, and I used parameterized queries in the backend to prevent SQL injection.",
+      "Honestly, I have never learned RAG. At Dar I mostly worked on full-stack features and data analysis, not AI pipelines",
+      "At Dar I worked with the engineering team on internal full-stack tools. I built frontend pages and backend endpoints, and did data analysis and preprocessing on project data. I also got exposure to cybersecurity through Microsoft Defender and the ICT infrastructure team.",
+      "Sorry, I misspoke. I implemented the RAG pipeline for SigmaTutor myself, including chunking the course materials, embedding them, and retrieving the relevant sections for the LLM."
+    ],
+    "interview_scores": [
+      0.9,
+      0.9,
+      0.5,
+      0.75,
+      0.6
+    ],
+    "interview_score_reasoning": [
+      "The candidate provides a solid, technically sound explanation of applying Python, NumPy, Pandas, and PyTorch to ECG signals for anomaly detection, aligning well with the deep learning and signal processing requirements.",
+      "Demonstrates clear hands-on experience with SQL schema design, foreign keys, JOINs, aggregation, and backend security measures such as parameterized queries to ensure data integrity.",
+      "Candidly admits to not knowing RAG and that their work at Dar focused on full-stack features and data analysis rather than AI pipelines, showing honesty though falling short on desired RAG competencies.",
+      "Describes contributions to full-stack tools, backend endpoints, data preprocessing, and cybersecurity exposure, satisfying full-stack and multidisciplinary team collaboration requirements.",
+      "Clarifies the previous contradiction by stating they did implement a RAG pipeline for SigmaTutor with chunking, embeddings, and retrieval, but the initial misstatement and subsequent correction introduces some uncertainty regarding the depth of hands-on experience."
+    ],
+    "interview_complete": true,
+    "answer_source": "candidate",
+    "consistency_flags": {
+      "C1": false,
+      "C2": false,
+      "C3": false,
+      "C4": false,
+      "C5": false,
+      "C6": false,
+      "C7": false,
+      "C8": false,
+      "C9": false,
+      "C10": false,
+      "C11": false,
+      "C12": false,
+      "C13": false,
+      "C14": false,
+      "C15": false,
+      "C16": false,
+      "C17": false,
+      "C18": false,
+      "C19": false,
+      "C20": false,
+      "C21": false,
+      "C22": false,
+      "C23": false,
+      "C24": false,
+      "C25": false,
+      "C26": false
+    },
+    "follow_up_needed": false,
+    "verification_completed": true,
+    "verification_notes": "The candidate initially denied experience with RAG in interview:3, stating they only worked on full-stack features and data analysis at Dar. However, in interview:5, the candidate clarified and corrected themselves, admitting they personally implemented the RAG pipeline for SigmaTutor. Furthermore, GitHub repositories like SigmaTutor and RAGSystem corroborate their practical experience with RAG and LLMs.",
+    "github_repository_urls": [],
+    "github_evidence": {
+      "profile:malak-darwish": {
+        "exists": true,
+        "languages_used": [
+          "JavaScript",
+          "Python"
+        ],
+        "repos": [
+          {
+            "name": "HR-System",
+            "language": "Python",
+            "description": null,
+            "stars": 0,
+            "readme_excerpt": ""
+          },
+          {
+            "name": "RAGSystem",
+            "language": "JavaScript",
+            "description": null,
+            "stars": 0,
+            "readme_excerpt": "# RAG Chat\n\nA full-stack conversational AI app powered by Retrieval-Augmented Generation. Ask questions about a PDF document and get cited, grounded answers — with full conversation history, response regeneration, and human feedback collection.\n\n---\n\n## Features\n\n**Core**\n- **Streaming responses** —"
+          },
+          {
+            "name": "dar-internship-2026",
+            "language": "JavaScript",
+            "description": null,
+            "stars": 0,
+            "readme_excerpt": null
+          },
+          {
+            "name": "CampMondo",
+            "language": "JavaScript",
+            "description": "CampMondo is a full-stack camp management platform designed to simplify the organization of summer camps and activities. The system allows parents, staff, and administrators to manage registrations, schedules, activities, payments, attendance, and camper information through an interactive and user-friendly interface. ",
+            "stars": 0,
+            "readme_excerpt": "# CampMondo 🏕️\n\nA full-stack web-based Summer Camp Management System built for COE 416 – Software Engineering at the Lebanese American University.\n\nCampMondo centralizes camper registration, attendance tracking, payment management, incident reporting, and parent–staff communication through a role-ba"
+          },
+          {
+            "name": "SigmaTutor",
+            "language": "Python",
+            "description": "SigmaTutor is a domain-specific AI tutor specialized in Signals, Systems, and Communications Engineering. It combines retrieval-augmented generation (RAG), reasoning agents, signal visualization, and MATLAB code generation to provide interactive explanations, problem solving, and course-grounded learning support.",
+            "stars": 0,
+            "readme_excerpt": "# 🚀 SigmaTutor\r\n\r\nSigmaTutor is a domain-specific AI tutor specialized in Signals, Systems, and Communications Engineering. It combines Retrieval-Augmented Generation (RAG) with a tool-augmented reasoning agent to provide interactive explanations, signal visualization, MATLAB code generation, and co"
+          },
+          {
+            "name": "ToDoList",
+            "language": "JavaScript",
+            "description": "A productivity-focused React web app featuring a smart To-Do List with priority-based tasks, habit tracking for daily routines, and a built-in Pomodoro timer with study/break sessions to help users stay organized and focused.",
+            "stars": 0
+          },
+          {
+            "name": "Degree-Map",
+            "language": null,
+            "description": "A full-stack web app that helps LAU Computer Engineering, Electrical Engineering, and Mechatronics Engineering students plan their entire degree, from freshman year to graduation. The app enforces prerequisite rules, warns about conflicts, and recommends a valid course order, all powered by data structures built from scratch.",
+            "stars": 0
+          },
+          {
+            "name": "AM-Receiver",
+            "language": null,
+            "description": "amplitude modulated signal receiver. this circuit is intended to receive AM signal through input wire, demodulate, amplify, and provide enough output current for a speaker to drive.",
+            "stars": 0
+          }
+        ],
+        "status": "found"
+      }
+    },
+    "interview_round": 2,
+    "follow_up_count": 1,
+    "max_follow_ups": 2,
+    "overall_score": 0.827,
+    "interview_average": 0.73,
+    "requirement_assessments": [
+      {
+        "requirement_id": "R1",
+        "requirement": "Programming skills in Python",
+        "job_description_quote": "Strong programming skills in Python; familiarity with Java, C++, or JavaScript a plus",
+        "evidence_kind": "capability",
+        "claim_ids": [
+          "C4"
+        ],
+        "supported": true,
+        "reasoning": "Claim C4 provides direct evidence of Python programming skills through public repositories such as 'SigmaTutor' and 'HR-System', supported by interview discussions detailing its use in complex projects."
+      },
+      {
+        "requirement_id": "R2",
+        "requirement": "Coursework or hands-on experience with Deep Learning and/or Large Language Models",
+        "job_description_quote": "Coursework or hands-on experience with Deep Learning and/or Large Language Models",
+        "evidence_kind": "capability",
+        "claim_ids": [
+          "C10",
+          "C12"
+        ],
+        "supported": true,
+        "reasoning": "Claims C10 and C12 establish hands-on experience with both Large Language Models (via RAGSystem and SigmaTutor) and Deep Learning (via PyTorch-based heartbeat anomaly detection)."
+      },
+      {
+        "requirement_id": "R3",
+        "requirement": "Experience with Git/GitHub and collaborative development workflows",
+        "job_description_quote": "Experience with Git/GitHub and collaborative development workflows",
+        "evidence_kind": "capability",
+        "claim_ids": [
+          "C14",
+          "C15"
+        ],
+        "supported": true,
+        "reasoning": "Claims C14 and C15 confirm proficiency with Git and GitHub through multiple active public code repositories."
+      },
+      {
+        "requirement_id": "R4",
+        "requirement": "Familiarity with data structures, database systems, and SQL",
+        "job_description_quote": "Comfortable with data structures, database systems, and SQL",
+        "evidence_kind": "capability",
+        "claim_ids": [
+          "C8"
+        ],
+        "supported": true,
+        "reasoning": "Claim C8 confirms familiarity and practical use of database systems and SQL through relational schema design and complex query writing in the Camp Management System project."
+      }
+    ],
+    "requirement_coverage": 1.0,
+    "required_evidence_complete": true,
+    "scored_claim_ids": [
+      "C4",
+      "C8",
+      "C10",
+      "C12",
+      "C14",
+      "C15"
+    ],
+    "excluded_claim_ids": [
+      "C1",
+      "C2",
+      "C3",
+      "C5",
+      "C6",
+      "C7",
+      "C9",
+      "C11",
+      "C13",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22",
+      "C23",
+      "C24",
+      "C25",
+      "C26"
+    ],
+    "verification_limitations": [
+      "Claims still unverified: C1, C3, C5, C6, C9, C17, C20, C22, C26. Their verdicts remain unchanged.",
+      "Claims excluded from the role-specific score (unassessed or not mapped to mandatory requirements): C1, C2, C3, C5, C6, C7, C9, C11, C13, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25, C26.",
+      "The overall score uses assessed claims mapped to mandatory job requirements; it is not verification of the entire CV.",
+      "Interview-only support, not independent verification: C8, C12.",
+      "Degree and soft-skill requirements are excluded from automated assessment and require manual HR review."
+    ],
+    "final_decision": "hire",
+    "decision_reasoning": "The overall score meets the hire threshold of 0.75; screening passed, required evidence is complete, and no unresolved contradictions remain."
+  }
+}

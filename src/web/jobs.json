@@ -1,0 +1,72 @@
+[
+  {
+    "id": "rag-engineer",
+    "title": "RAG Engineer",
+    "team": "AI",
+    "location": "Beirut, hybrid",
+    "type": "Full-time",
+    "summary": "Build retrieval-augmented chatbots that answer questions from company documents.",
+    "description": "RAG Engineer\n\nYou will build retrieval-augmented generation (RAG) systems that let employees ask questions about internal documents and get grounded, cited answers.\n\nRequirements:\n- Strong Python skills\n- Experience with LangChain or LlamaIndex\n- Vector databases such as FAISS, Chroma or Pinecone\n- Embeddings, chunking strategies and prompt engineering with LLM APIs\n- Building REST APIs with FastAPI or Flask\n- Git and working in a collaborative team\n\nNice to have:\n- Docker\n- Evaluating RAG quality (e.g. RAGAS)"
+  },
+  {
+    "id": "junior-rag-engineer",
+    "title": "Junior RAG Engineer",
+    "team": "AI",
+    "location": "Beirut, hybrid",
+    "type": "Full-time",
+    "summary": "Build retrieval-augmented LLM features and multi-agent workflows on top of our internal knowledge base.",
+    "skills": [
+      "Python",
+      "LangChain",
+      "LangGraph",
+      "LLM APIs",
+      "Flask"
+    ],
+    "description": "Junior RAG Engineer\n\nWe are building AI assistants that answer questions from our internal documents. You will help design the retrieval pipeline, build agent workflows, and expose them through simple web APIs.\n\nWhat you will do:\n- Build retrieval-augmented generation (RAG) pipelines in Python\n- Design multi-agent workflows with LangChain and LangGraph\n- Write prompts and structured outputs for LLMs such as Gemini or GPT\n- Expose AI features through REST APIs (Flask or FastAPI)\n- Test and debug LLM behaviour and document what you find\n\nRequirements:\n- Good Python skills\n- Hands-on experience with LangChain or LangGraph\n- Experience calling LLM APIs (Gemini, OpenAI or similar)\n- Basic REST API development\n- Git and GitHub for team projects\n\nNice to have:\n- Embeddings and vector databases (FAISS, Chroma, pgvector)\n- SQL databases\n- JavaScript for simple frontends"
+  },
+  {
+    "id": "junior-python-dev",
+    "title": "Junior Python Developer",
+    "team": "Engineering",
+    "location": "Beirut, hybrid",
+    "type": "Full-time",
+    "summary": "Build and maintain internal tools and APIs with a small backend team.",
+    "skills": [
+      "Python",
+      "Flask",
+      "SQL",
+      "Git"
+    ],
+    "description": "Junior Python Developer\n\nWe are looking for a junior developer to build and maintain internal tools and REST APIs.\n\nRequirements:\n- Solid Python skills\n- Experience with Flask or FastAPI\n- Working knowledge of SQL databases\n- Git and collaborative development\n- Bachelor's degree in Computer Science, Computer Engineering or a related field\n\nNice to have:\n- Experience with LLM APIs or LangChain\n- Docker"
+  },
+  {
+    "id": "frontend-dev",
+    "title": "Frontend Developer",
+    "team": "Product",
+    "location": "Remote",
+    "type": "Full-time",
+    "summary": "Turn designs into fast, accessible interfaces for our customer-facing apps.",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React"
+    ],
+    "description": "Frontend Developer\n\nYou will build customer-facing web interfaces together with our designers.\n\nRequirements:\n- Strong HTML, CSS and JavaScript\n- Experience with React\n- Responsive and accessible design\n- Working with REST APIs\n- Portfolio or GitHub with real projects\n\nNice to have:\n- E-commerce experience (Shopify or similar)\n- TypeScript"
+  },
+  {
+    "id": "hr-data-analyst",
+    "title": "HR Data Analyst",
+    "team": "People",
+    "location": "Beirut, on-site",
+    "type": "Internship, 6 months",
+    "summary": "Turn hiring and retention data into reports the People team can act on.",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Python",
+      "Reporting"
+    ],
+    "description": "HR Data Analyst (Internship)\n\nHelp the People team understand hiring and retention through data.\n\nRequirements:\n- Excel or Google Sheets at an advanced level\n- Basic Python or SQL for data analysis\n- Clear written communication\n- Currently enrolled in a university program\n\nNice to have:\n- Power BI or Tableau\n- Interest in HR"
+  }
+]

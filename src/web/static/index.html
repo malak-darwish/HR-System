@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2F4F1;
+    --surface: #FFFFFF;
+    --ink: #17302B;
+    --muted: #5B6F69;
+    --line: #D6DED9;
+    --pine: #2E6B5A;
+    --pine-dark: #1F4F42;
+    --pine-soft: #E1ECE6;
+    --mustard: #D9A93A;
+    --mustard-soft: #F7EDD3;
+    --rust: #B24A30;
+    --rust-soft: #F6E1DA;
+    --radius-lg: 22px;
+    --radius: 12px;
+    --shadow: 0 1px 2px rgba(23,48,43,.06), 0 8px 24px rgba(23,48,43,.06);
+    --font: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.55 var(--font); }
+  button, input, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+
+  /* ── Header ── */
+  header.site { max-width: 1120px; margin: 0 auto; padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand { display: flex; align-items: center; gap: .6rem; background: none; border: 0; padding: 0; cursor: pointer; font-weight: 700; font-size: 1.2rem; letter-spacing: -.02em; }
+  .brand-mark { width: 2.1rem; height: 2.1rem; border-radius: 10px; background: var(--pine); color: #fff; display: grid; place-items: center; font-size: .85rem; letter-spacing: 0; }
+  .header-note { font-size: .92rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .3rem .85rem; }
+
+  main { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem 5rem; }
+
+  /* ── Hero ── */
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: end; padding: 3rem 0 3rem; }
+  .hero h1 { font-size: clamp(2.8rem, 7.5vw, 5.2rem); line-height: .95; letter-spacing: -.045em; margin: 0 0 1.1rem; font-weight: 700; }
+  .hero p { margin: 0; color: var(--muted); font-size: 1.15rem; max-width: 34rem; }
+  .how { background: var(--pine); color: #fff; border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; list-style: none; margin: 0; counter-reset: how; }
+  .how li { counter-increment: how; display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; padding: .55rem 0; }
+  .how li + li { border-top: 1px solid rgba(255,255,255,.15); }
+  .how li::before { content: counter(how); width: 1.75rem; height: 1.75rem; border-radius: 50%; background: rgba(255,255,255,.15); display: grid; place-items: center; font-weight: 700; font-size: .85rem; }
+  .how b { display: block; font-weight: 500; }
+  .how span { color: rgba(255,255,255,.75); font-size: .93rem; }
+
+  /* ── Job list ── */
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+  .list-head h2 { margin: 0; font-size: 1.5rem; letter-spacing: -.02em; }
+  .list-head span { color: var(--muted); }
+  .jobs { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+  .job { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+  .job:hover, .job.open { border-color: var(--pine); box-shadow: var(--shadow); }
+  .job-head { width: 100%; text-align: left; background: none; border: 0; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: .5rem 1.5rem; padding: 1.4rem 1.6rem; }
+  .job-title { font-size: 1.45rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+  .job-summary { color: var(--muted); grid-column: 1; }
+  .tags { grid-column: 1; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tag { font-size: .82rem; padding: .2rem .65rem; border-radius: 999px; background: var(--paper); color: var(--muted); }
+  .tag.team { background: var(--pine-soft); color: var(--pine-dark); }
+  .job-toggle { grid-row: 1 / span 3; grid-column: 2; align-self: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 1.3rem; color: var(--pine); transition: transform .25s, background .2s; }
+  .job.open .job-toggle { transform: rotate(45deg); background: var(--pine); color: #fff; border-color: var(--pine); }
+
+  .job-body { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; padding: .25rem 1.6rem 1.6rem; border-top: 1px solid var(--line); padding-top: 1.4rem; }
+  .jd { white-space: pre-wrap; margin: 0; font-size: .97rem; max-width: 68ch; }
+  .apply { background: var(--paper); border-radius: var(--radius); padding: 1.25rem; align-self: start; }
+  .apply h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+  .drop { display: block; border: 2px dashed var(--line); border-radius: var(--radius); padding: 1.1rem; text-align: center; cursor: pointer; background: var(--surface); transition: border-color .2s; }
+  .drop:hover, .drop.has-file { border-color: var(--pine); }
+  .drop input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .drop b { display: block; font-weight: 500; }
+  .drop small { color: var(--muted); }
+  .drop:focus-within { outline: 3px solid var(--mustard); outline-offset: 2px; }
+  .or { display: flex; align-items: center; gap: .75rem; color: var(--muted); font-size: .9rem; margin: .9rem 0; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  textarea { width: 100%; border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .85rem; background: var(--surface); resize: vertical; }
+  textarea:focus { border-color: var(--pine); outline: none; box-shadow: 0 0 0 3px var(--pine-soft); }
+  .btn { background: var(--pine); color: #fff; border: 0; border-radius: 999px; padding: .75rem 1.5rem; font-weight: 500; cursor: pointer; transition: background .2s; }
+  .btn:hover { background: var(--pine-dark); }
+  .btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; }
+  .btn.full { width: 100%; margin-top: 1rem; }
+  .btn.ghost { background: none; color: var(--pine); border: 1px solid var(--pine); }
+  .btn.ghost:hover { background: var(--pine-soft); }
+  .error { color: var(--rust); font-size: .93rem; margin: .75rem 0 0; }
+
+  /* ── Interview ── */
+  .interview { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; padding-top: 1.5rem; }
+  .side { position: sticky; top: 1rem; align-self: start; }
+  .role-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.2rem 1.3rem; margin-bottom: 1rem; }
+  .role-card small { color: var(--muted); }
+  .role-card strong { display: block; font-size: 1.2rem; letter-spacing: -.01em; line-height: 1.25; margin-top: .15rem; }
+  .rail { list-style: none; margin: 0; padding: 1.3rem; counter-reset: step; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  .rail li { position: relative; padding: 0 0 1.4rem 2.6rem; counter-increment: step; }
+  .rail li:last-child { padding-bottom: 0; }
+  .rail li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--line); background: var(--surface); font-size: .85rem; font-weight: 700; color: var(--muted); }
+  .rail li:not(:last-child)::after { content: ""; position: absolute; left: calc(.9rem - 1px); top: 1.95rem; bottom: .2rem; width: 2px; background: var(--line); }
+  .rail .step-name { font-weight: 500; display: block; line-height: 1.8rem; }
+  .rail .step-extra { color: #8A6A14; font-size: .85rem; font-weight: 500; }
+  .rail li.active::before { border-color: var(--pine); color: var(--pine); background: var(--pine-soft); animation: pulse 1.6s ease-in-out infinite; }
+  .rail li.done::before { content: "✓"; border-color: var(--pine); background: var(--pine); color: #fff; }
+  .rail li.done:not(:last-child)::after { background: var(--pine); }
+  .rail li.skipped { opacity: .4; }
+  .rail li.skipped::before { content: "–"; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 6px var(--pine-soft); } }
+
+  .chat-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 72vh; box-shadow: var(--shadow); overflow: hidden; }
+  .chat-top { padding: 1rem 1.5rem; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: .75rem; }
+  .avatar { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--pine-soft); color: var(--pine-dark); display: grid; place-items: center; font-weight: 700; font-size: .85rem; flex: none; }
+  .chat-top b { display: block; font-weight: 500; line-height: 1.2; }
+  .chat-top small { color: var(--muted); }
+  .log { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem; overflow-y: auto; max-height: 62vh; background: linear-gradient(var(--surface), var(--paper) 140%); }
+  .row { display: flex; gap: .6rem; align-items: flex-end; }
+  .row.me { flex-direction: row-reverse; }
+  .row.me .avatar { background: var(--ink); color: #fff; }
+  .msg { max-width: 72%; padding: .8rem 1.05rem; border-radius: 18px; white-space: pre-wrap; animation: in .25s ease-out; }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } }
+  .row.them .msg { background: var(--pine-soft); border-bottom-left-radius: 5px; }
+  .row.me .msg { background: var(--ink); color: #fff; border-bottom-right-radius: 5px; }
+  .row.followup .msg { background: var(--mustard-soft); }
+  .msg .who { display: block; font-size: .8rem; font-weight: 500; opacity: .7; margin-bottom: .15rem; }
+  .notice { align-self: center; background: var(--rust-soft); color: var(--rust); padding: .7rem 1rem; border-radius: var(--radius); max-width: 90%; font-size: .93rem; }
+
+  .status { color: var(--muted); font-size: .93rem; padding: .6rem 1.5rem; min-height: 2.4rem; display: flex; align-items: center; gap: .5rem; }
+  .typing { display: inline-flex; gap: 3px; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--pine); animation: bounce 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes bounce { 0%, 60%, 100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+
+  .composer { display: flex; gap: .75rem; padding: 1rem 1.25rem 1.1rem; border-top: 1px solid var(--line); align-items: flex-end; background: var(--surface); }
+  .composer textarea { min-height: 3rem; max-height: 12rem; background: var(--paper); }
+  .composer .hint { color: var(--muted); font-size: .8rem; }
+
+  /* ── Outcome ── */
+  .outcome { text-align: center; padding: 2.5rem 1.5rem 3rem; margin: .5rem auto 0; max-width: 34rem; animation: in .4s ease-out; }
+  .outcome-icon { width: 4.5rem; height: 4.5rem; border-radius: 50%; margin: 0 auto 1.2rem; display: grid; place-items: center; font-size: 2rem; font-weight: 700; }
+  .outcome.accepted .outcome-icon { background: var(--pine); color: #fff; }
+  .outcome.rejected .outcome-icon { background: var(--rust-soft); color: var(--rust); }
+  .outcome.waitlist .outcome-icon { background: var(--mustard-soft); color: #8A6A14; }
+  .outcome h3 { font-size: clamp(1.7rem, 4vw, 2.3rem); letter-spacing: -.03em; line-height: 1.1; margin: 0 0 .75rem; }
+  .outcome p { color: var(--muted); margin: 0 0 1.5rem; }
+  .outcome .reason { text-align: left; background: var(--paper); border-radius: var(--radius); padding: 1rem 1.2rem; color: var(--ink); margin-bottom: 1.5rem; white-space: pre-wrap; }
+  .outcome .reason b { display: block; font-weight: 500; margin-bottom: .3rem; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 0; }
+    .job-body { grid-template-columns: 1fr; }
+    .interview { grid-template-columns: 1fr; gap: 1rem; }
+    .side { position: static; }
+    .rail { display: flex; gap: .5rem; overflow-x: auto; padding: 1rem; }
+    .rail li { padding: 2.2rem 0 0; min-width: 6.5rem; font-size: .9rem; }
+    .rail li:not(:last-child)::after { display: none; }
+    .msg { max-width: 85%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <button class="brand" id="home" aria-label="Back to open roles"><span class="brand-mark">HR</span>Careers</button>
+  <span class="header-note" id="headerNote">Now hiring</span>
+</header>
+
+<main>
+  <!-- Jobs view -->
+  <section id="jobsView">
+    <div class="hero">
+      <div>
+        <h1>Find your next role</h1>
+        <p>Apply with your CV and do your first interview right here in the chat. No scheduling, and you get an answer at the end.</p>
+      </div>
+      <ol class="how">
+        <li><div><b>Choose a role</b><span>Read the requirements and upload your CV.</span></div></li>
+        <li><div><b>Answer a few questions</b><span>A short chat interview about your experience.</span></div></li>
+        <li><div><b>Get your result</b><span>You'll know right away whether you move forward.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="list-head"><h2>Open roles</h2><span id="jobCount"></span></div>
+    <ul class="jobs" id="jobList"><li style="color:var(--muted)">Loading roles…</li></ul>
+  </section>
+
+  <!-- Interview view -->
+  <section id="interviewView" hidden>
+    <div class="interview">
+      <aside class="side">
+        <div class="role-card"><small>Interview for</small><strong id="roleTitle"></strong></div>
+        <ol class="rail" id="rail">
+          <li data-node="screener"><span class="step-name">CV review</span></li>
+          <li data-node="interviewer"><span class="step-name">Interview</span><span class="step-extra" id="followupNote"></span></li>
+          <li data-node="verification"><span class="step-name">Answer check</span></li>
+          <li data-node="recruiter"><span class="step-name">Decision</span></li>
+        </ol>
+      </aside>
+
+      <div class="chat-panel">
+        <div class="chat-top">
+          <span class="avatar">HR</span>
+          <div><b>Interviewer</b><small id="chatSub">Reviewing your CV</small></div>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+        <div class="status" id="status"></div>
+        <form class="composer" id="composer">
+          <div style="flex:1">
+            <textarea id="answer" rows="2" placeholder="Wait for the first question…" disabled aria-label="Your answer"></textarea>
+            <span class="hint">Enter to send, Shift+Enter for a new line</span>
+          </div>
+          <button class="btn" id="sendBtn" disabled>Send answer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const $ = (sel) => document.querySelector(sel);
+const STEP_ORDER = ["screener", "interviewer", "verification", "recruiter"];
+
+let jobs = [];
+let sessionId = null;
+let interviewRounds = 0;
+let followUps = 0;
+
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "text") node.textContent = v;
+    else node.setAttribute(k, v);
+  }
+  node.append(...children.filter(Boolean));
+  return node;
+}
+
+// ── Jobs ───────────────────────────────────────────────
+async function loadJobs() {
+  try {
+    jobs = await (await fetch("/api/jobs")).json();
+    $("#jobCount").textContent = `${jobs.length} ${jobs.length === 1 ? "position" : "positions"}`;
+    renderJobs();
+  } catch {
+    $("#jobList").innerHTML = '<li class="error">Could not load roles. Check that the Flask server is running.</li>';
+  }
+}
+
+function renderJobs() {
+  const list = $("#jobList");
+  list.innerHTML = "";
+  for (const job of jobs) {
+    const bodyId = `job-${job.id}`;
+    const item = el("li", { class: "job" });
+
+    const head = el("button", { class: "job-head", "aria-expanded": "false", "aria-controls": bodyId },
+      el("span", { class: "job-title", text: job.title }),
+      el("span", { class: "job-toggle", "aria-hidden": "true", text: "+" }),
+      el("span", { class: "job-summary", text: job.summary }),
+      el("span", { class: "tags" },
+        el("span", { class: "tag team", text: job.team }),
+        el("span", { class: "tag", text: job.location }),
+        el("span", { class: "tag", text: job.type })),
+    );
+
+    const fileInput = el("input", { type: "file", name: "cv_file", accept: ".pdf,.txt" });
+    const dropText = el("b", { text: "Upload your CV" });
+    const drop = el("label", { class: "drop" }, fileInput, dropText, el("small", { text: "PDF or .txt file" }));
+    fileInput.addEventListener("change", () => {
+      const f = fileInput.files[0];
+      dropText.textContent = f ? f.name : "Upload your CV";
+      drop.classList.toggle("has-file", !!f);
+    });
+
+    const form = el("form", { class: "apply" },
+      el("h3", { text: "Apply for this role" }),
+      drop,
+      el("div", { class: "or", text: "or paste it" }),
+      el("textarea", { name: "cv_text", rows: "5", "aria-label": "Paste your CV", placeholder: "Paste your CV text here" }),
+      el("button", { class: "btn full", type: "submit", text: "Start interview" }),
+      el("p", { class: "error", hidden: "" }),
+    );
+    form.addEventListener("submit", (e) => { e.preventDefault(); applyTo(job, form); });
+
+    const body = el("div", { class: "job-body", id: bodyId, hidden: "" }, el("p", { class: "jd", text: job.description }), form);
+
+    head.addEventListener("click", () => {
+      const open = head.getAttribute("aria-expanded") === "true";
+      head.setAttribute("aria-expanded", String(!open));
+      body.hidden = open;
+      item.classList.toggle("open", !open);
+    });
+
+    item.append(head, body);
+    list.append(item);
+  }
+}
+
+async function applyTo(job, form) {
+  const errorEl = form.querySelector(".error");
+  const button = form.querySelector("button");
+  errorEl.hidden = true;
+
+  const data = new FormData(form);
+  const file = data.get("cv_file");
+  if ((!file || !file.name) && !data.get("cv_text").trim()) {
+    errorEl.textContent = "Upload a CV or paste it in the box.";
+    errorEl.hidden = false;
+    return;
+  }
+  data.append("job_id", job.id);
+
+  button.disabled = true;
+  button.textContent = "Starting…";
+  try {
+    const res = await fetch("/api/apply", { method: "POST", body: data });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "Could not start the interview.");
+    startInterview(json.session_id, job.title);
+  } catch (err) {
+    errorEl.textContent = err.message;
+    errorEl.hidden = false;
+  } finally {
+    button.disabled = false;
+    button.textContent = "Start interview";
+  }
+}
+
+// ── Interview ──────────────────────────────────────────
+function startInterview(id, title) {
+  sessionId = id;
+  interviewRounds = 0;
+  followUps = 0;
+  $("#roleTitle").textContent = title;
+  $("#headerNote").textContent = "Interview in progress";
+  $("#log").innerHTML = "";
+  $("#followupNote").textContent = "";
+  $("#composer").hidden = false;
+  document.querySelectorAll("#rail li").forEach((li) => (li.className = ""));
+  $("#jobsView").hidden = true;
+  $("#interviewView").hidden = false;
+  window.scrollTo(0, 0);
+
+  setStep("screener", "active");
+  setStatus("Reading your CV");
+  poll();
+}
+
+function setStep(node, state) {
+  const li = document.querySelector(`#rail li[data-node="${node}"]`);
+  if (li) li.className = state;
+}
+
+function setStatus(text) {
+  const s = $("#status");
+  s.innerHTML = "";
+  if (text) s.append(el("span", { class: "typing", "aria-hidden": "true" }, el("i"), el("i"), el("i")), el("span", { text }));
+  $("#chatSub").textContent = text || "Online";
+}
+
+function addMessage(kind, who, text) {
+  const mine = kind === "me";
+  const row = el("div", { class: `row ${kind}` },
+    el("span", { class: "avatar", text: mine ? "You" : "HR" }),
+    el("div", { class: "msg" }, el("span", { class: "who", text: who }), document.createTextNode(text)));
+  $("#log").append(row);
+  $("#log").scrollTop = $("#log").scrollHeight;
+}
+
+function addNotice(text) {
+  $("#log").append(el("div", { class: "notice", text }));
+  $("#log").scrollTop = $("#log").scrollHeight;
+}
+
+function setComposer(enabled) {
+  $("#answer").disabled = !enabled;
+  $("#sendBtn").disabled = !enabled;
+  $("#answer").placeholder = enabled ? "Type your answer" : "Wait for the next question…";
+  if (enabled) $("#answer").focus();
+}
+
+async function poll() {
+  const mySession = sessionId;
+  while (sessionId === mySession) {
+    let event;
+    try {
+      const res = await fetch(`/api/session/${mySession}/next`);
+      event = await res.json();
+      if (!res.ok) throw new Error(event.error);
+    } catch (err) {
+      setStatus("");
+      addNotice((err.message || "The server stopped responding.") + " Refresh the page to start again.");
+      return;
+    }
+    if (sessionId !== mySession) return;
+    handleEvent(event);
+    if (event.type === "done" || event.type === "error") return;
+  }
+}
+
+function handleEvent(ev) {
+  if (ev.type === "question") {
+    const isFollowUp = interviewRounds > 0;
+    if (isFollowUp) {
+      followUps += 1;
+      $("#followupNote").textContent = `Follow-up ${followUps}`;
+    }
+    setStep("interviewer", "active");
+    setStep("verification", "");
+    setStatus("");
+    addMessage(isFollowUp ? "them followup" : "them", isFollowUp ? "Follow-up question" : "Interviewer", ev.text);
+    setComposer(true);
+  } else if (ev.type === "stage") {
+    onStageDone(ev.node);
+  } else if (ev.type === "done") {
+    setStatus("");
+    setComposer(false);
+    $("#composer").hidden = true;
+    $("#headerNote").textContent = "Interview finished";
+    showOutcome(ev.result);
+  } else if (ev.type === "error") {
+    setStatus("");
+    setComposer(false);
+    addNotice("The interview stopped because of a server error. Refresh the page to try again.");
+    console.error(ev.message);   // technical details stay in the browser console
+  }
+}
+
+function onStageDone(node) {
+  setStep(node, "done");
+  if (node === "screener") {
+    setStep("interviewer", "active");
+    setStatus("Preparing your questions");
+  } else if (node === "interviewer") {
+    interviewRounds += 1;
+    setComposer(false);
+    setStep("verification", "active");
+    setStatus("Checking your answers");
+  } else if (node === "verification") {
+    setStatus("Reviewing your interview");
+  } else if (node === "recruiter") {
+    STEP_ORDER.forEach((n) => {
+      const li = document.querySelector(`#rail li[data-node="${n}"]`);
+      if (!li.classList.contains("done")) li.className = "skipped";
+    });
+  }
+}
+
+$("#composer").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = $("#answer").value.trim();
+  if (!text) return;
+  setComposer(false);
+  try {
+    const res = await fetch(`/api/session/${sessionId}/answer`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ answer: text }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error);
+    addMessage("me", "You", text);
+    $("#answer").value = "";
+    setStatus("Reading your answer");
+  } catch (err) {
+    addNotice(err.message);
+    setComposer(true);
+  }
+});
+
+$("#answer").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    $("#composer").requestSubmit();
+  }
+});
+
+// ── Outcome ────────────────────────────────────────────
+// Field names from the Recruiter: adjust these to match src/state.py if they differ.
+const DECISION_KEYS = ["decision", "final_decision", "hiring_decision", "recommendation"];
+const REASON_KEYS = ["decision_rationale", "rationale", "recruiter_notes", "decision_reason", "summary"];
+
+function pick(obj, keys) {
+  for (const k of keys) if (obj[k] !== undefined && obj[k] !== null && obj[k] !== "") return obj[k];
+  return null;
+}
+
+function outcomeType(result) {
+  let d = pick(result, DECISION_KEYS);
+  if (d && typeof d === "object") d = d.decision || d.label || "";
+  d = String(d || "").toLowerCase();
+  if (/reject|no.?hire|decline|not/.test(d)) return "rejected";   // check before "hire"
+  if (/wait|hold|maybe|review/.test(d)) return "waitlist";
+  if (/hire|accept|advance|pass|yes/.test(d)) return "accepted";
+  if (result.screening_passed === false) return "rejected";
+  return "waitlist";
+}
+
+const OUTCOMES = {
+  accepted: { icon: "✓", title: "You're moving forward", text: "Your interview went well. The hiring team will contact you about the next step." },
+  rejected: { icon: "✕", title: "Your application wasn't successful", text: "Thank you for taking the time to apply and interview with us." },
+  waitlist: { icon: "…", title: "You're on our shortlist", text: "We'd like to consider you further. The hiring team will review your application and get back to you." },
+};
+
+function defaultReason(result) {
+  if (result.screening_passed === false) {
+    return "Your CV didn't match enough of the key requirements for this role, so we didn't continue to the interview.";
+  }
+  return null;
+}
+
+function showOutcome(result) {
+  const type = outcomeType(result);
+  const o = OUTCOMES[type];
+  let reason = pick(result, REASON_KEYS);
+  if (reason && typeof reason !== "string") reason = Array.isArray(reason) ? reason.join("\n") : JSON.stringify(reason);
+  reason = reason || defaultReason(result);
+
+  const box = el("div", { class: `outcome ${type}` },
+    el("div", { class: "outcome-icon", "aria-hidden": "true", text: o.icon }),
+    el("h3", { text: o.title }),
+    el("p", { text: o.text }),
+    type === "rejected" && reason ? el("div", { class: "reason" }, el("b", { text: "Why" }), document.createTextNode(reason)) : null,
+    el("button", { class: "btn ghost", type: "button", id: "backBtn", text: "See other open roles" }),
+  );
+
+  console.log("Final pipeline state:", result);   // full state for debugging (F12 → Console)
+  $("#log").append(box);
+  $("#backBtn").addEventListener("click", goHome);
+  box.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function goHome() {
+  sessionId = null;
+  $("#interviewView").hidden = true;
+  $("#jobsView").hidden = false;
+  $("#headerNote").textContent = "Now hiring";
+  window.scrollTo(0, 0);
+}
+$("#home").addEventListener("click", goHome);
+
+loadJobs();
+</script>
+</body>
+</html>
