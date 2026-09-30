@@ -1,0 +1,8 @@
+langchain-google-genai
+langchain-core
+langgraph
+scikit-learn
+numpy
+pymupdf
+pydantic
+python-dotenv

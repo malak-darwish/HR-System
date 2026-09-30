@@ -1,0 +1,366 @@
+{
+  "final_state": {
+    "cv_text": "Malak Darwish\nSenior Computer and Electrical Engineering Student • Lebanese American University\nBeirut, Lebanon • +961-03-070-331 • malak.darwish@lau.edu\nEducation\nBE in Computer Engineering\nLebanese American University (LAU)\nExpected Graduation: Fall 2028\nBeirut, LB\nGithub: https://github.com/malak-darwish\n• Relevant Coursework: Deep Learning, Large Language Models, Software Engineering, Database Systems, Commu\nnication Systems, Data Structures\n• Honors & Awards: Merit Scholarship for Baccalaureate Distinction, Dean’s Distinguished List\nSkills\nProgramming: Python, Java, C++, JavaScript, SQL, Assembly (Easy68K)\nAI/ML: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Deep Learning, Data Analysis\nFrameworks & Tools: Git, GitHub, MATLAB, ModelSim, HTML, CSS, LaTeX, Microsoft Office, LTspice\nWork Experience\nAI & Software Engineering Intern\nDar\nSummer 2026\nInternship\n• Developed AI applications using Retrieval-Augmented Generation (RAG), custom agents, and LLM-based work\nflows.\n• Built and contributed to full-stack applications while collaborating with multidisciplinary engineering teams.\n• Performed data analysis and preprocessing to support AI-driven solutions.\n• Gained hands-on experience with cybersecurity concepts, Microsoft Defender, and ICT infrastructure.\nCoding & Electronics Instructor\nSTEM Outreach Program\n2025\nPart-time Job\n• Delivered coding and electronics workshops and designed hands-on learning activities for students across four schools.\nSelected Projects\nSigmaTutor\nLarge Language Models\n• Developed an AI tutor for Signals and Communication Systems using a custom LLM agent with specialized tools.\n2026\nCourse Project\n• Implemented RAG to provide accurate, context-aware explanations from course materials, and tools for signal\nplotting, exam generation, and matlab coding.\nHeartbeat Anomaly Detection\nDeep Learning\n• Developed a deep learning model to detect abnormal heartbeats from ECG signals.\n• Applied data preprocessing, feature extraction, model training, and performance evaluation.\nCamp Management System\nSoftware Engineering\n2026\nCourse Project\n2026\nCourse Project\n• Developed a full-stack web application for managing camp registrations, participants, schedules, and administrative\ntasks.\n• Worked on both frontend and backend development while applying software engineering principles, database design,\nand team collaboration practices.\nLogic-Controlled Board\nDigital Systems\n• Implemented a digital system using TTL logic gates to control LED mapping based on switch activation order.\n2025\nCourse Project\n• Designed combinational and sequential logic without using microcontrollers",
+    "job_description": "Job Title: Registered Nurse – Intensive Care Unit (ICU)\n\nLocation: Beirut, Lebanon\nEmployment Type: Full-time\n\nAbout the Role:\nWe are seeking a compassionate and skilled Registered Nurse to join our Intensive Care Unit. The nurse will provide direct care to critically ill patients, monitor vital signs, administer medications, and work closely with physicians and the multidisciplinary care team.\n\nResponsibilities:\n- Assess, plan, and deliver nursing care to critically ill patients\n- Monitor patients on ventilators, cardiac monitors, and infusion pumps\n- Administer medications and IV therapies according to physician orders\n- Respond to medical emergencies and assist in resuscitation procedures\n- Maintain accurate patient records and nursing documentation\n- Educate patients and families on care plans and discharge instructions\n\nMandatory Requirements:\n- Bachelor of Science in Nursing (BSN)\n- Valid Registered Nurse license from the Order of Nurses in Lebanon\n- Minimum 3 years of clinical experience in an ICU or critical care setting\n- Current Basic Life Support (BLS) and Advanced Cardiovascular Life Support (ACLS) certifications\n- Strong knowledge of critical care procedures, patient monitoring, and medication administration\n- Ability to work rotating shifts, including nights, weekends, and holidays\n\nPreferred Qualifications:\n- Experience with electronic health record (EHR) systems\n- Fluency in Arabic, English, and French",
+    "parsed_cv": {
+      "name": "Malak Darwish",
+      "email": "malak.darwish@lau.edu",
+      "phone": "+961-03-070-331",
+      "education": [
+        "BE in Computer Engineering, Lebanese American University (LAU), Expected Graduation: Fall 2028"
+      ],
+      "experience": [
+        "AI & Software Engineering Intern at Dar, Summer 2026",
+        "Coding & Electronics Instructor at STEM Outreach Program, 2025"
+      ],
+      "skills": [
+        "Python",
+        "Java",
+        "C++",
+        "JavaScript",
+        "SQL",
+        "Assembly (Easy68K)",
+        "Large Language Models (LLMs)",
+        "Retrieval-Augmented Generation (RAG)",
+        "Deep Learning",
+        "Data Analysis",
+        "Git",
+        "GitHub",
+        "MATLAB",
+        "ModelSim",
+        "HTML",
+        "CSS",
+        "LaTeX",
+        "Microsoft Office",
+        "LTspice"
+      ],
+      "projects": [
+        "SigmaTutor",
+        "Heartbeat Anomaly Detection",
+        "Camp Management System",
+        "Logic-Controlled Board"
+      ],
+      "github_username": "malak-darwish",
+      "years_of_experience": 1.0
+    },
+    "match_score": 0.0,
+    "screening_passed": false,
+    "screening_reasoning": "The candidate's CV is entirely focused on Computer Engineering, with skills in Python, Java, LLMs, and hardware, whereas the job description is for a Registered Nurse in an Intensive Care Unit (ICU) requiring a BSN and a nursing license. There is a complete mismatch in qualifications and experience. Match score 0.00 < threshold 0.6.",
+    "claims": [
+      {
+        "claim_id": "C1",
+        "text": "BE in Computer Engineering at Lebanese American University (LAU)",
+        "category": "education",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C2",
+        "text": "AI & Software Engineering Intern at Dar",
+        "category": "experience",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C3",
+        "text": "Coding & Electronics Instructor at STEM Outreach Program",
+        "category": "experience",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C4",
+        "text": "Python",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C5",
+        "text": "Java",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C6",
+        "text": "C++",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C7",
+        "text": "JavaScript",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C8",
+        "text": "SQL",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C9",
+        "text": "Assembly (Easy68K)",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C10",
+        "text": "Large Language Models (LLMs)",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C11",
+        "text": "Retrieval-Augmented Generation (RAG)",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C12",
+        "text": "Deep Learning",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C13",
+        "text": "Data Analysis",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C14",
+        "text": "Git",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C15",
+        "text": "GitHub",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C16",
+        "text": "MATLAB",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C17",
+        "text": "ModelSim",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C18",
+        "text": "HTML",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C19",
+        "text": "CSS",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C20",
+        "text": "LaTeX",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C21",
+        "text": "Microsoft Office",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C22",
+        "text": "LTspice",
+        "category": "skill",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C23",
+        "text": "SigmaTutor",
+        "category": "project",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C24",
+        "text": "Heartbeat Anomaly Detection",
+        "category": "project",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C25",
+        "text": "Camp Management System",
+        "category": "project",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      },
+      {
+        "claim_id": "C26",
+        "text": "Logic-Controlled Board",
+        "category": "project",
+        "verified": null,
+        "confidence": null,
+        "source": null,
+        "evidence": null,
+        "evidence_refs": []
+      }
+    ],
+    "questions": [],
+    "answers": [],
+    "interview_scores": [],
+    "interview_score_reasoning": [],
+    "interview_complete": false,
+    "answer_source": "candidate",
+    "consistency_flags": {},
+    "follow_up_needed": false,
+    "verification_completed": false,
+    "verification_notes": null,
+    "github_repository_urls": [],
+    "github_evidence": {},
+    "interview_round": 0,
+    "follow_up_count": 0,
+    "max_follow_ups": 2,
+    "overall_score": null,
+    "interview_average": null,
+    "requirement_assessments": [],
+    "requirement_coverage": null,
+    "required_evidence_complete": false,
+    "scored_claim_ids": [],
+    "excluded_claim_ids": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22",
+      "C23",
+      "C24",
+      "C25",
+      "C26"
+    ],
+    "verification_limitations": [
+      "Requirements were not assessed because screening did not pass."
+    ],
+    "final_decision": "reject",
+    "decision_reasoning": "Screening failed; the candidate is rejected regardless of the overall score. Screening failed because the candidate's background is entirely in Computer Engineering, Python, Java, LLMs, and hardware, presenting a complete mismatch with the Registered Nurse position in the Intensive Care Unit requiring a BSN and nursing license. Verification limitations apply as requirements were not assessed because screening did not pass. Missing mandatory evidence includes all necessary nursing qualifications. Unknown claims comprise education claim C1, experience claims C2 and C3, skill claims C4 through C22, and project claims C23 through C26."
+  }
+}

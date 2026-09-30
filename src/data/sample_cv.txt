@@ -1,0 +1,59 @@
+Malak Darwish
+Senior Computer and Electrical Engineering Student • Lebanese American University
+Beirut, Lebanon • +961-03-070-331 • malak.darwish@lau.edu
+Education
+BE in Computer Engineering
+Lebanese American University (LAU)
+Expected Graduation: Fall 2028
+Beirut, LB
+Github: https://github.com/malak-darwish
+• Relevant Coursework: Deep Learning, Large Language Models, Software Engineering, Database Systems, Commu
+nication Systems, Data Structures
+• Honors & Awards: Merit Scholarship for Baccalaureate Distinction, Dean’s Distinguished List
+Skills
+Programming: Python, Java, C++, JavaScript, SQL, Assembly (Easy68K)
+AI/ML: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Deep Learning, Data Analysis
+Frameworks & Tools: Git, GitHub, MATLAB, ModelSim, HTML, CSS, LaTeX, Microsoft Office, LTspice
+Work Experience
+AI & Software Engineering Intern
+Dar
+Summer 2026
+Internship
+• Developed AI applications using Retrieval-Augmented Generation (RAG), custom agents, and LLM-based work
+flows.
+• Built and contributed to full-stack applications while collaborating with multidisciplinary engineering teams.
+• Performed data analysis and preprocessing to support AI-driven solutions.
+• Gained hands-on experience with cybersecurity concepts, Microsoft Defender, and ICT infrastructure.
+Coding & Electronics Instructor
+STEM Outreach Program
+2025
+Part-time Job
+• Delivered coding and electronics workshops and designed hands-on learning activities for students across four schools.
+Selected Projects
+SigmaTutor
+Large Language Models
+• Developed an AI tutor for Signals and Communication Systems using a custom LLM agent with specialized tools.
+2026
+Course Project
+• Implemented RAG to provide accurate, context-aware explanations from course materials, and tools for signal
+plotting, exam generation, and matlab coding.
+Heartbeat Anomaly Detection
+Deep Learning
+• Developed a deep learning model to detect abnormal heartbeats from ECG signals.
+• Applied data preprocessing, feature extraction, model training, and performance evaluation.
+Camp Management System
+Software Engineering
+2026
+Course Project
+2026
+Course Project
+• Developed a full-stack web application for managing camp registrations, participants, schedules, and administrative
+tasks.
+• Worked on both frontend and backend development while applying software engineering principles, database design,
+and team collaboration practices.
+Logic-Controlled Board
+Digital Systems
+• Implemented a digital system using TTL logic gates to control LED mapping based on switch activation order.
+2025
+Course Project
+• Designed combinational and sequential logic without using microcontrollers
