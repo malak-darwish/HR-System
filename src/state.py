@@ -1,5 +1,3 @@
-"""Shared contract for all four agents; lists use replacement semantics."""
-
 from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
@@ -29,9 +27,7 @@ class Claim(Record):
     claim_id: Text
     text: Text
     category: Literal["experience", "skill", "education", "project"]
-    # True: supported by available evidence; False: contradicted; None: unknown.
     verified: Annotated[bool, Field(strict=True)] | None = None
-    # Support for the truth of the claim, NOT certainty in a negative verdict.
     confidence: Score | None = None
     source: Text | None = None
     evidence: Text | None = None
@@ -64,12 +60,10 @@ class HRState(Record):
     interview_complete: bool = False
     answer_source: Literal["candidate", "simulated"] = "candidate"
 
-    # One meaning across B/C/D: True means an unresolved contradiction.
     consistency_flags: dict[str, Annotated[bool, Field(strict=True)]] = Field(default_factory=dict)
     follow_up_needed: bool = False
     verification_completed: bool = False
     verification_notes: Text | None = None
-    # References only: a repository owner is not necessarily the candidate.
     github_repository_urls: list[Text] = Field(default_factory=list)
     github_evidence: dict[str, Any] = Field(default_factory=dict)
 

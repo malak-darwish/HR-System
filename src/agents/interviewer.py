@@ -1,26 +1,3 @@
-"""
-Interviewer Agent (Person B)
-
-Adapted to Person D's shared contract (src/state.py) and graph (src/graph.py).
-
-  1. Reads the candidate's CV sections using get_cv_section_tool
-  2. Generates personalized questions using question_bank_tool + LLM
-  3. Collects candidate answers (real input via answer_provider, or simulated)
-  4. Asks follow-up questions when the Verification Agent flags contradictions
-
-STATE EVOLUTION (Requirement C):
-  - D's state uses REPLACEMENT semantics for lists (no reducers), so this
-    node always returns the FULL questions/answers lists.
-
-FOLLOW-UP LOOP (Requirement F):
-  - D's graph owns routing and the counters: it decides when to come back here,
-    and it alone updates interview_round / follow_up_count. This node must
-    NEVER return those fields (the graph raises ValueError if it does).
-  - Any visit after the main interview is a follow-up: ONE targeted question
-    about claims with an unresolved contradiction (consistency_flags, keyed by
-    claim_id, True = unresolved) or a verified=False verdict.
-"""
-
 from datetime import date
 from typing import Callable, Optional
 
@@ -198,15 +175,12 @@ def make_interviewer(*, simulate: bool = False,
 
     def get_answer(question: str, cv_parsed: dict) -> str:
         raw = simulate_candidate_answer(question, cv_parsed) if simulate else provider(question)
-        # Text fields have min_length=1; an empty answer would fail state validation.
+        
         return (raw or "").strip() or "(no answer given)"
 
     def interviewer_node(state: HRState) -> dict:
         cv_parsed = state.parsed_cv.model_dump() if state.parsed_cv else {}
 
-        # ── FOLLOW-UP FLOW: any visit after the main interview ──
-        # D's graph also routes here for verified=False claims even when
-        # follow_up_needed is False, so the branch keys off interview_complete.
         if state.interview_complete:
             flagged_ids = [cid for cid, bad in state.consistency_flags.items() if bad]
             flagged_ids += [c.claim_id for c in state.claims
@@ -226,7 +200,6 @@ def make_interviewer(*, simulate: bool = False,
                 "answer_source": source,
             }
 
-        # ── NORMAL FLOW ──
         print("\n[START] [Interviewer] Starting interview...")
         questions = generate_interview_questions(cv_parsed, state.job_description) or FALLBACK_QUESTIONS
 
@@ -247,6 +220,4 @@ def make_interviewer(*, simulate: bool = False,
 
     return interviewer_node
 
-
-# Backward-compatible name for older tests that import interviewer_node directly.
 interviewer_node = make_interviewer(simulate=True)

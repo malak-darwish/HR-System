@@ -1,24 +1,3 @@
-"""
-Flask backend for the HR system frontend.
-
-Run (works from any folder, thanks to the sys.path line below):
-    pip install flask pypdf
-    cd src/web
-    python app.py
-Then open http://127.0.0.1:5000
-
-How live answers work:
-  Person D's graph accepts answer_provider(question) -> str. Each application
-  runs the graph in a background thread. When the interviewer asks a question,
-  answer_provider pushes it to the browser and blocks until the candidate replies.
-  No agent code is changed.
-
-Terminal output:
-  Each agent prints a line when it finishes, and the full report (Q&A, claims with
-  verified/confidence/source, flags, notes, decision) is printed when the
-  interview ends. The candidate only sees the outcome in the browser.
-"""
-
 import io
 import json
 import queue
@@ -27,7 +6,6 @@ import threading
 import uuid
 from pathlib import Path
 
-# Make the src folder importable no matter where the app is started from.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -39,8 +17,8 @@ HERE = Path(__file__).parent
 JOBS = json.loads((HERE / "jobs.json").read_text(encoding="utf-8"))
 JOBS_BY_ID = {job["id"]: job for job in JOBS}
 
-ANSWER_TIMEOUT = 30 * 60   # seconds the graph waits for one answer
-POLL_TIMEOUT = 25          # seconds one /next request waits before returning "idle"
+ANSWER_TIMEOUT = 30 * 60   
+POLL_TIMEOUT = 25         
 NODES = {"screener", "interviewer", "verification", "recruiter"}
 DECISION_KEYS = ("decision", "final_decision", "hiring_decision", "recommendation")
 
@@ -50,8 +28,8 @@ sessions: dict[str, "Session"] = {}
 
 class Session:
     def __init__(self):
-        self.events = queue.Queue()    # backend -> browser (questions, stages, result)
-        self.answers = queue.Queue()   # browser -> backend (candidate answers)
+        self.events = queue.Queue()    
+        self.answers = queue.Queue()   
         self.waiting_for_answer = False
 
 
@@ -98,7 +76,7 @@ def print_report(result: dict, job_title: str, tag: str):
 
 
 def run_pipeline(session: Session, cv_text: str, job: dict, thread_id: str):
-    tag = thread_id[:6]   # short id so parallel interviews are easy to tell apart
+    tag = thread_id[:6]  
 
     def answer_provider(question: str) -> str:
         session.waiting_for_answer = True
@@ -116,8 +94,6 @@ def run_pipeline(session: Session, cv_text: str, job: dict, thread_id: str):
         config = {"configurable": {"thread_id": thread_id}}
         inputs = {"cv_text": cv_text, "job_description": job["description"]}
 
-        # stream_mode="updates" yields {node_name: update} after each node finishes,
-        # which lets the page show which agent is working.
         for chunk in graph.stream(inputs, config=config, stream_mode="updates"):
             for node in chunk:
                 if node in NODES:
@@ -127,7 +103,7 @@ def run_pipeline(session: Session, cv_text: str, job: dict, thread_id: str):
         final = to_jsonable(graph.get_state(config).values)
         print_report(final, job["title"], tag)
         session.events.put({"type": "done", "result": final})
-    except Exception as exc:  # show the error instead of hanging
+    except Exception as exc:  
         print(f"[{tag}] ERROR: {type(exc).__name__}: {exc}", flush=True)
         session.events.put({"type": "error", "message": f"{type(exc).__name__}: {exc}"})
 
@@ -141,9 +117,6 @@ def extract_cv_text() -> str:
             return "\n".join(page.extract_text() or "" for page in reader.pages)
         return data.decode("utf-8", errors="ignore")
     return request.form.get("cv_text", "")
-
-
-# ── Routes ──────────────────────────────────────────────────────────────
 
 @app.get("/")
 def index():
@@ -162,7 +135,6 @@ def apply():
         return jsonify(error="This role no longer exists. Refresh the page."), 404
 
     cv_text = extract_cv_text().strip()
-    # Guard against the empty-CV "Jane Doe" hallucination from before.
     if len(cv_text) < 50:
         return jsonify(error="No readable text found in the CV. Upload a text-based PDF or paste your CV."), 400
 
@@ -204,5 +176,4 @@ def submit_answer(session_id):
 
 
 if __name__ == "__main__":
-    # use_reloader=False: the debug reloader would start every pipeline thread twice.
     app.run(debug=True, threaded=True, use_reloader=False)

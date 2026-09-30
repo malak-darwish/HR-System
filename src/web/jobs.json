@@ -1,12 +1,13 @@
 [
   {
-    "id": "rag-engineer",
-    "title": "RAG Engineer",
+    "id": "junior-ai-engineer",
+    "title": "Junior AI Engineer (RAG & LLM Agents)",
     "team": "AI",
     "location": "Beirut, hybrid",
     "type": "Full-time",
-    "summary": "Build retrieval-augmented chatbots that answer questions from company documents.",
-    "description": "RAG Engineer\n\nYou will build retrieval-augmented generation (RAG) systems that let employees ask questions about internal documents and get grounded, cited answers.\n\nRequirements:\n- Strong Python skills\n- Experience with LangChain or LlamaIndex\n- Vector databases such as FAISS, Chroma or Pinecone\n- Embeddings, chunking strategies and prompt engineering with LLM APIs\n- Building REST APIs with FastAPI or Flask\n- Git and working in a collaborative team\n\nNice to have:\n- Docker\n- Evaluating RAG quality (e.g. RAGAS)"
+    "summary": "Build RAG systems and LLM agents that answer questions from internal documents.",
+    "skills": ["Python", "RAG", "LLM Agents", "Git"],
+    "description": "Junior AI Engineer (RAG & LLM Agents)\n\nYou will build LLM-powered applications that answer questions from internal documents and automate workflows with AI agents.\n\nRequirements:\n- Strong Python skills\n- Experience building Retrieval-Augmented Generation (RAG) systems\n- Building LLM agents with custom tools and LLM-based workflows\n- Data analysis and preprocessing for AI solutions\n- Git and GitHub, working in a collaborative team\n\nNice to have:\n- Deep learning model training and evaluation\n- Full-stack web development (JavaScript, SQL)"
   },
   {
     "id": "junior-rag-engineer",

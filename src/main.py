@@ -1,11 +1,3 @@
-"""Run the full A -> B -> C -> D pipeline through Person D's graph.
-
-From the HR-System root:
-    python -m src.run_pipeline                      # simulated candidate (default)
-    python -m src.run_pipeline --interactive        # you type the answers
-    python -m src.run_pipeline --output out/run.json
-"""
-
 import argparse
 import json
 import sys

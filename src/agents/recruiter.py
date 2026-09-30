@@ -1,5 +1,3 @@
-"""Person D: fill missing interview scores, apply fixed policy, explain with Gemini."""
-
 from statistics import mean
 
 from llm import structured_call
@@ -59,9 +57,6 @@ def recruiter_node(state: HRState) -> dict:
             "match_score": state.match_score, "interview_scores": scores,
             "claim_confidences": [c.confidence for c in state.claims if c.claim_id in scored_ids],
         })
-
-    # C may still request follow-up for an optional unknown claim. D evaluates
-    # mandatory coverage directly instead of treating that broad flag as a veto.
     unresolved_claims = [c for c in state.claims if c.verified is not True
                          or c.confidence is None or c.confidence < 0.5]
     unexplained_follow_up = state.follow_up_needed and not unresolved_claims

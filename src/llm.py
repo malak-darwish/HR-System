@@ -1,5 +1,3 @@
-"""One lazy Gemini configuration for all agents; importing never calls an API."""
-
 import json
 import os
 import re
@@ -37,9 +35,7 @@ def get_model() -> ChatGoogleGenerativeAI:
         model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite"),
         google_api_key=key,
         vertexai=False,
-        # Flash Lite uses fixed sampling; omit an unsupported temperature override.
         temperature=None,
-        # One bounded retry for transient provider failures; never fabricate output.
         max_retries=6,
         timeout=90,
     )
